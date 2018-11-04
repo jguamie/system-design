@@ -1,25 +1,27 @@
+# Raft Distributed Consensus
+Notes on [Raft: Understandable Distributed Consensus](http://thesecretlivesofdata.com/raft/)
 Node can be in three states: Follower, Candidate, or Leader.
-# Leader
+## Leader
 All change requests go to the *Leader*.
-# Log Replication Summary
+## Log Replication Summary
   1. Change is added as an entry to node's log.
-		* Entry is not committed yet.
+    * Entry is not committed yet.
   1. Entry is replicated to all *Followers*.
   1. *Followers* confirm with *Leader* on writing the entry.
   1. *Leader* commits entry and applies the state change.
   1. *Leader* notifies *Followers* that entry is committed.
   1. Cluster is in consensus on state.
-# Leader Election Summary
+## Leader Election Summary
   1. Nodes all start in the *Followers* state
   1. One of the nodes becomes a *Candidate*. 
   1. The *Candidate* will request votes from the other nodes.
   1. Nodes reply with their vote.
   1. If *Candidate* gets votes from a majority of notes, it becomes the *Leader*.
-# Election Timeout
+## Election Timeout
   1. Each node has a randomized election timeout between 150ms - 300ms.
   1. At the end of timeout, *Follower* become a *Candidate*.
   1. This starts an Election Term.
-# Election Term
+## Election Term
   1. *Candidate* votes for itself.
   1. It sends out Request Vote messages to other nodes for the specific Term ID.
   1. If nodes haven't voted yet for a given Term ID, it will reply to the *Candidate* with a vote and reset its election timeout.
@@ -29,15 +31,15 @@ All change requests go to the *Leader*.
   1. *Followers* respond to each Append Entries message and resets its election timeout.
   1. Election Term will continue until a *Follower* stops receiving heartbeats (Append Entries messages).
     * *Followers* becomes a *Candidate* if it hasn't received a heartbeat by the time its election timeout runs out.
-# Split Vote Issue
+## Split Vote Issue
   1. If vote are split evenly, election timeout causes another node to become a *Candidate*.
   1. It sends out Request Vote message to other nodes for a new Term ID.
-# Log Replication
+## Log Replication
   1. *Leader* sends out changes via the Append Entries messages on the next heartbeat.
   1. *Followers* acknowledge the change.
   1. *Leader* commits the entry when majority of *Followers* acknowledges the change.
   1. Response is sent to the Client.
-# Network Partition Issue
+## Network Partition Issue
   1. Nodes are divided to be in separate network partitions.
   1. A *Leader* will exist in each of the partitions.
   1. Clients send Change Requests to both *Leader*.
