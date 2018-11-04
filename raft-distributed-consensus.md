@@ -1,5 +1,6 @@
 # Raft Distributed Consensus
-Notes on [Raft: Understandable Distributed Consensus](http://thesecretlivesofdata.com/raft/)
+Notes on [Raft: Understandable Distributed Consensus](http://thesecretlivesofdata.com/raft/).
+
 Node can be in three states: Follower, Candidate, or Leader.
 ## Leader
 All change requests go to the *Leader*.
