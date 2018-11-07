@@ -5,4 +5,4 @@
   1. [Grokking the System Design Interview - educative.io Course](https://www.educative.io/collection/5668639101419520/5649050225344512)
 # Notes
   1. [Raft Distributed Consensus](https://github.com/jguamie/system-design/blob/master/notes/raft-distributed-consensus.md)
-  
+  1. [System Design Math](https://github.com/jguamie/system-design/blob/master/notes/math.md)
