@@ -2,17 +2,6 @@
 ## Data Capacity
 Estimate daily active users. Memory utilized per user. Queries per second (QPS).
 Use the Pareto 80/20 Principle. 20% of daily active traffic will account for 80% of usage patterns.
-## Design Goals
-### Latency
-### Consistency
-[Read-After-Write Consistency in Amazon S3](https://shlomoswidler.com/2009/12/read-after-write-consistency-in-amazon.html)
-#### Read-after-write Consistency
-With read-after-write consistency, a newly-created object, file, or table row will immediately be visible to all clients, without any delays. Note: read-after-write is not complete consistency. There’s also read-after-update and read-after-delete.
-#### Read-after-update Consistency
-Read-after-update consistency would allow edits to an existing file, changes to an already-existing object, or updates to an existing table row to be immediately visible to all clients. That’s not related to read-after-write, which is only for new data. 
-#### Read-after-delete Consistency
-Read-after-delete would guarantee that reading a deleted object, file, or table row will fail for all clients.
-### Availability
 ## Cache Eviction Policies
 [Cache Replacement Policies - Wikipedia](https://en.wikipedia.org/wiki/Cache_replacement_policies)
 ### Least Recently Used (LRU)
@@ -34,7 +23,6 @@ This is a caching system where writes go to cache alone and immediately confirme
 Higher TTL leads to longer caching and faster reads for clients. It also reduces traffic to DB. However, consistency worsens.
 ### Shorter TTL
 Shorter TTL leads to improved consistency. However, this limits caching and add read latency to clients. 
-## Distributed Cache
 ## Example: DNS
 [In the World of DNS, Cache is King](http://blog.catchpoint.com/2014/07/15/world-dns-cache-king/)
 ## Example: HTTP Cache Headers
