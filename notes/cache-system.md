@@ -1,1 +1,30 @@
+# Cache System
+## Data Capacity
+Estimate daily active users. Memory utilized per user. Queries per second (QPS).
+Use the Pareto 80/20 Principle. 20% of daily active traffic will account for 80% of usage patterns.
+## Design Goals
+### Latency
+### Consistency
+### Availability
+## Eviction Policy
+### Least Recently Used (LRU)
+Discards the least recently used items first. This algorithm requires keeping track of what was used when, which is expensive if one wants to make sure the algorithm always discards the least recently used item. General implementations of this technique require keeping "age bits" for cache-lines and track the "Least Recently Used" cache-line based on age-bits. This policy is the most popular due to its simplicity, good runtime performance, and a decent hit rate in common workloads.
+### Random Replacement (RR)
+Randomly selects a candidate item and discards it to make space when necessary. This algorithm does not require keeping any information about the access history. 
+### Least Frequently Used (LFU)
+Counts how often an item is needed. Those that are used least often are discarded first. This works very similar to LRU except that instead of storing the value of how recently a block was accessed, we store the value of how many times it was accessed.
+## Cache Invalidation
+### Write-through Cache
+This is a caching system where writes go through the cache and write is confirmed as success to the client only if writes to DB and cache BOTH succeed. This is really useful for applications which write and re-read the information quickly. We will have complete data consistency between cache and storage. Also, this ensures that nothing will get lost in case of a crash, power failure, or other system disruptions. However, writes to two separate systems will cause higher write latency.
+### Write-around Cache
+This is a caching system where writes go directly to the DB and confirmed as success to the client. This can reduce flooding the cache with write operations that will not subsequently be re-read. However, this has the disadvantage that a read request for recently written data will create a “cache miss” and must be read from DB causing higher read latency.
+### Write-back Cache
+This is a caching system where writes go to cache alone and immediately confirmed as success to the client. The cache then asynchronously syncs this write to the DB. The write-back to permanent storage is done asynchonously or at specified intervals. This results in low latency and high write throughput for write-intensive applications. However, this speed comes with the risk of data loss during system disruptions. We can add replication to the cache and require replicas to confirm writes as well.
+## Distributed Cache
 
+# References
+[Design a Cache System - Gainlo](http://blog.gainlo.co/index.php/2016/05/17/design-a-cache-system/)
+[Design Cache - InterviewBit](https://www.interviewbit.com/problems/design-cache/)
+[Cache Replacement Policies - Wikipedia](https://en.wikipedia.org/wiki/Cache_replacement_policies)
+[Memcached - Wikipedia](https://en.wikipedia.org/wiki/Memcached)
+[TTL - Wikipedia](https://en.wikipedia.org/wiki/Time_to_live)
