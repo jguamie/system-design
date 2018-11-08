@@ -5,6 +5,8 @@ Use the Pareto 80/20 Principle. 20% of daily active traffic will account for 80%
 ## Cache Eviction Policies
 [Cache Replacement Policies - Wikipedia](https://en.wikipedia.org/wiki/Cache_replacement_policies)
 ### Least Recently Used (LRU)
+[Implement LRU Cache - LeetCode](https://leetcode.com/problems/lru-cache/description/)
+
 Discards the least recently used items first. This algorithm requires keeping track of what was used when, which is expensive if one wants to make sure the algorithm always discards the least recently used item. General implementations of this technique require keeping "age bits" for cache-lines and track the "Least Recently Used" cache-line based on age-bits. This policy is the most popular due to its simplicity, good runtime performance, and a decent hit rate in common workloads.
 ### Random Replacement (RR)
 Randomly selects a candidate item and discards it to make space when necessary. This algorithm does not require keeping any information about the access history. 
