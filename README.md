@@ -6,3 +6,4 @@
 # Notes
   1. [Raft Distributed Consensus](https://github.com/jguamie/system-design/blob/master/notes/raft-distributed-consensus.md)
   1. [System Design Math](https://github.com/jguamie/system-design/blob/master/notes/math.md)
+  1. [Caching](https://github.com/jguamie/system-design/blob/master/notes/caching.md)
