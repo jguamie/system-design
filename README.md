@@ -5,7 +5,6 @@
 1. [Rendezvous Hashing - Wikipedia](https://en.wikipedia.org/wiki/Rendezvous_hashing)
 ## Week 2 (2018 Nov 3)
 1. [Caching](https://github.com/jguamie/system-design/blob/master/notes/caching.md)
-1. [Logging - Sampling Methods](https://en.wikipedia.org/wiki/Sampling_(statistics))
 1. [What happens when you type google.com into your browser?](https://github.com/alex/what-happens-when)
 # Resources
 1. [Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems - Martin Kleppmann](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321) Chapters 1-9 only
