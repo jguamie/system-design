@@ -1,4 +1,4 @@
-# Cache System
+# Caching
 ## Data Capacity
 Estimate daily active users. Memory utilized per user. Queries per second (QPS).
 Use the Pareto 80/20 Principle. 20% of daily active traffic will account for 80% of usage patterns.
