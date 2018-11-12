@@ -20,3 +20,4 @@ Use a hybrid of the two options. Users with a large number of followers (celebri
 # References
 1. [Chapter 1, Describing Load - Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321)
 1. [Designing Twitter - Grokking the System Design Interview](https://www.educative.io/collection/page/5668639101419520/5649050225344512/5741031244955648)
+1. [Designing Facebook’s Newsfeed](https://www.educative.io/collection/page/5668639101419520/5649050225344512/5641332169113600)
