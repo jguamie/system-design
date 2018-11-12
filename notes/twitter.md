@@ -7,7 +7,7 @@ A user can publish a new message to their followers (4.6k RPS on average, 12k RP
 #### Home Timeline
 A user can view tweets posted by people they follow (300k RPS).
 ### Options
-#### Fan Out on Read
+#### Fan Out on Load
 New tweets are inserted into a global relational database. When a user reads their home timeline, request for new tweets for users they follow from the database.
 
 The problem with this option is that the system will struggle to keep up with high load of home timeline queries.
