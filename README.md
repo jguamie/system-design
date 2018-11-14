@@ -22,3 +22,4 @@
 1. [MapReduce: Simplified Data Processing on Large Clusters](http://research.google.com/archive/mapreduce.html)
 1. [Spanner: Becoming a SQL System](https://ai.google/research/pubs/pub46103)
 1. [The Chubby lock service for loosely-coupled distributed systems](https://ai.google/research/pubs/pub27897)
+1. [Dremel: Interactive Analysis of Web-Scale Datasets](https://ai.google/research/pubs/pub36632)
