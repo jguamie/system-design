@@ -44,3 +44,11 @@ long | 8 bytes
 # Time
 * 1 hour = 3,600 seconds
 * 1 day = 86,400 seconds
+# High Availability (HA)
+Availability % | Downtime per Year
+------------ | ------------
+90% ("one nine") | 36.5 days
+99% ("two nines")	| 3.65 days
+99.9% ("three nines")	| 9 hours
+99.99% ("four nines")	| 50 minutes
+99.999% ("five nines") | 5 minutes
