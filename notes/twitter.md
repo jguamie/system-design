@@ -19,5 +19,4 @@ The problem with this option is that when a user has over 30 million followers, 
 Use a hybrid of the two options. Users with a large number of followers (celebrities) post tweets to the global relational database. Users with a small number of followers post to followers' home timeline caches. When a user reads their home timeline, merge new tweets from the global database into their timeline cache.
 # References
 1. [Chapter 1, Describing Load - Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321)
-1. [Designing Twitter - Grokking the System Design Interview](https://www.educative.io/collection/page/5668639101419520/5649050225344512/5741031244955648)
-1. [Designing Facebook’s Newsfeed](https://www.educative.io/collection/page/5668639101419520/5649050225344512/5641332169113600)
+1. [Designing Facebook’s Newsfeed - Grokking the System Design Interview](https://www.educative.io/collection/page/5668639101419520/5649050225344512/5641332169113600)
