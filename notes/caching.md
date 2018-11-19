@@ -12,6 +12,8 @@ Discards the least recently used items first. This algorithm requires keeping tr
 Randomly selects a candidate item and discards it to make space when necessary. This algorithm does not require keeping any information about the access history. 
 ### Least Frequently Used (LFU)
 Counts how often an item is needed. Those that are used least often are discarded first. This works very similar to LRU except that instead of storing the value of how recently a block was accessed, we store the value of how many times it was accessed.
+### LFU with Dynamic Aging (LFUDA)
+Same as LFU but adds an age factor to the reference count. In LFU, items frequently accessed in the past but unpopular today will remain in the cache for a long time. Dynamic Aging reduces the count of such items thereby making them eligible for replacement.
 ## Cache Invalidation
 ### Write-through Cache
 This is a caching system where writes go through the cache and write is confirmed as success to the client only if writes to DB and cache BOTH succeed. This is really useful for applications which write and re-read the information quickly. We will have complete data consistency between cache and storage. Also, this ensures that nothing will get lost in case of a crash, power failure, or other system disruptions. However, writes to two separate systems will cause higher write latency.
