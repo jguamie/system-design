@@ -38,3 +38,14 @@ The Google File System (GFS) is a scalable, distributed file system.
 * The master detects failed chunkservers by detecting data corruption through checksumming.
 * GFS accomodate the relaxed consistency model by relying on appends versus overwrites, checkpointing, and writing self-validating, self-identifying records.
 * Each record prepared by the writer contains checksums so the record's validity can be verified.
+## Leases and Mutation Order
+These are the steps in which mutations are applied.
+1. The client requests for the primary chunkserver that hold a lease to a chunk as well as the replicas.
+1. If a chunkserver doesn't have the lease, the master grants a lease to one of the replicas. This replica becomes the primary.
+1. The client caches this lease for future mutations until the lease times out.
+1. **Data Flow.** The client pushes the data to all the replicas. Each chunkserver stores the data in an internal LRU buffer cache.
+1. **Control Flow.** Once all the replicas acknowledge receiving the data, the client sends a write request to the primary.
+1. The primary assigns a consecutive serial number to the mutation (serialization). It applies the mutation in its own local state in serial number order.
+1. The primary forwards the write request and serial number to all the secondary replicas. Each replica applies the mutation in the same serial number order as the primary.
+1. The secondary replicas reply to the primary indicating the write operation was successful.
+1. The primary replies to the client. Any errors are reported accordingly. If the write failed, the client will retry the operation from step 1.
