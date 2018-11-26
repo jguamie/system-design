@@ -43,9 +43,22 @@ These are the steps in which mutations are applied.
 1. The client requests for the primary chunkserver that hold a lease to a chunk as well as the replicas.
 1. If a chunkserver doesn't have the lease, the master grants a lease to one of the replicas. This replica becomes the primary.
 1. The client caches this lease for future mutations until the lease times out.
-1. **Data Flow.** The client pushes the data to all the replicas. Each chunkserver stores the data in an internal LRU buffer cache.
+1. **Data Flow.** The client pushes the data to all the replicas. Each chunkserver stores the data in an internal LRU buffer cache. The send order does not matter.
 1. **Control Flow.** Once all the replicas acknowledge receiving the data, the client sends a write request to the primary.
 1. The primary assigns a consecutive serial number to the mutation (serialization). It applies the mutation in its own local state in serial number order.
 1. The primary forwards the write request and serial number to all the secondary replicas. Each replica applies the mutation in the same serial number order as the primary.
 1. The secondary replicas reply to the primary indicating the write operation was successful.
 1. The primary replies to the client. Any errors are reported accordingly. If the write failed, the client will retry the operation from step 1.
+## High Availability
+* The master and chunkservers are designed to restore their state and start up in a matter of seconds.
+* The master clones existing replicas as needed. This is to keep chunks replicated as chunkservers go offline or are corrupted.
+* The master's operation log and checkpoints are replicated on multiple machines.
+* Master state mutations are only reported as successful once they have been recorded to disk locally and to all master replicas.
+## Data Integrity
+* Each chunkserver verifies the integrity of its data by maintaining checksums.
+* Each chunk is broken up into 64 KB blocks. Each block has a 32 bit checksum. Like other metadata, checksums are kept in memory and stored persistently.
+* On each read, chunkservers verify data blocks with the checksums that overlap with the read range. This is done prior to returning data to the requestor (client or another chunkserver).
+* If a block doesn't match the checksum, chunkserver returns an error to the requestor and reports a mismatch to the master.
+* On error, the client will request data from another replica. The master will clone the chunk from another replica and instruct the chunkserver to delete the corrupted chunk.
+* Checksumming has little effect on read performance. Checksums are only a small amount of extra data for verification.
+* For detecting corruption in chunks that are rarely used, during idle periods, chunkservers verify data blocks of inactive chunks.
