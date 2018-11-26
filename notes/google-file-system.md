@@ -17,7 +17,7 @@ The Google File System (GFS) is a scalable, distributed file system.
 * Clients only cache metadata. Clients stream huge files or have working sets too large to be cached.
 ### Chunk Size
 * Files are divided into fixed-size 64 GB chunks. Each chunk is identified by a globally-unique 64 bit chunk handle.
-* Large chunk size reduces client interactions with the master. Reads and writes on the same chunk only require one initial request to the master for chunk location info.
+* Large chunk sizes reduce client interactions with the master. Reads and writes on the same chunk only require one initial request to the master for chunk location info.
 ### Metadata
 * The metadata consists of file and chunk namespaces, access control information, file-to-chunk mappings, and chunk locations (on all replicas).
 * All metadata is available in master's memory.
@@ -33,10 +33,10 @@ The Google File System (GFS) is a scalable, distributed file system.
 * GFS has a relaxed consistency model.
 * Mutations to a chunk are applied in the same order across all replicas.
 * Chunk version numbers are used to detect replicas that have become stale. Stale replicas are garbage collected at the earliest opportunity.
-* Whenever a master grants a new lease on a chunk, it increases the chunk version number and informs the replicas. Chunk version numbers are applied and persisted on master and the replicas prior to client notification of the lease.
-* Leases include the chunk version number. Clients and chunkservers can verify the version number prior to performing an operation.
-* The master detects failed chunkservers by detecting data corruption through checksumming.
-* GFS accomodate the relaxed consistency model by relying on appends versus overwrites, checkpointing, and writing self-validating, self-identifying records.
+* Whenever a master grants a new lease on a chunk, it increases the chunk version number and informs the replicas. Chunk version numbers are applied on master and replicas prior to notifying the client of the new lease.
+* Leases include the chunk version number. Clients and chunkservers verify the version number prior to performing an operation.
+* The master detects data corruption on chunkservers through checksumming.
+* GFS accomodates the relaxed consistency model by relying on appends versus overwrites, checkpointing, and writing self-validating, self-identifying records.
 * Each record prepared by the writer contains checksums so the record's validity can be verified.
 ## Leases and Mutation Order
 These are the steps in which mutations are applied.
@@ -61,4 +61,4 @@ These are the steps in which mutations are applied.
 * If a block doesn't match the checksum, chunkserver returns an error to the requestor and reports a mismatch to the master.
 * On error, the client will request data from another replica. The master will clone the chunk from another replica and instruct the chunkserver to delete the corrupted chunk.
 * Checksumming has little effect on read performance. Checksums are only a small amount of extra data for verification.
-* For detecting corruption in chunks that are rarely used, during idle periods, chunkservers verify data blocks of inactive chunks.
+* During idle periods, chunkservers verify data blocks of inactive chunks. This addresses detecting corruption in chunks that are rarely used.
