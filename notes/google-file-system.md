@@ -5,7 +5,7 @@ The Google File System (GFS) is a scalable, distributed file system.
 * Writes are typically large, sequential writes that are appended to files. Once written, files are seldom modified again.
 * Most client applications prioritize processing data in bulk at a high rate. Not many have low latency requirements for an individual read/write.
 ## Design
-* Each GFS cluster has a single master and multiple chunk servers (3 replicas at default).
+Each GFS cluster has a single master and multiple chunk servers (3 replicas at default).
 ![gfs-architecture](https://github.com/jguamie/system-design/blob/master/images/gfs-architecture.png)
 ### Master
 * In terms of data, the master only maintains the file system metadata.
@@ -29,7 +29,7 @@ The Google File System (GFS) is a scalable, distributed file system.
 #### Operation Log
 * When the operation log becomes large, the master will checkpoint its state.
 * Master startup time is minimized by keeping the log small and replaying from the last checkpoint.
-* The checkpoint is a compact B-tree. Older checkpoints are deleted after the creation of a new checkpoint.
+* The checkpoint is a compact B-tree. Older checkpoints can be deleted after the creation of a new checkpoint. A few checkpoints are kept to safeguard against catastrophes.
 ## Consistency Model
 * GFS has a relaxed consistency model.
 * Mutations to a chunk are applied in the same order across all replicas.
@@ -50,6 +50,7 @@ These are the steps in which mutations are applied.
 1. The primary forwards the write request and serial number to all the secondary replicas. Each replica applies the mutation in the same serial number order as the primary.
 1. The secondary replicas reply to the primary indicating the write operation was completed (along with any errors).
 1. The primary replies to the client. Any errors encountered are reported. If the write failed, the client will retry the operation from step 1.
+Latency is minimized by pipelining data transfers over TCP connections. Once a chunkserver receives some data, it immediately begins forwarding to replicas. Sending data immediately does not reduce the receive rate due to using a switched network with full-duplex links. 1 MB is typically distributed in about 80 ms.
 ## High Availability
 * The master and chunkservers are designed to restore their state and start up in a matter of seconds.
 * The master clones existing replicas as needed. This is to keep chunks replicated as chunkservers go offline or are corrupted.
