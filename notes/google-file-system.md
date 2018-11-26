@@ -50,6 +50,7 @@ These are the steps in which mutations are applied.
 1. The primary forwards the write request and serial number to all the secondary replicas. Each replica applies the mutation in the same serial number order as the primary.
 1. The secondary replicas reply to the primary indicating the write operation was completed (along with any errors).
 1. The primary replies to the client. Any errors encountered are reported. If the write failed, the client will retry the operation from step 1.
+
 Latency is minimized by pipelining data transfers over TCP connections. Once a chunkserver receives some data, it immediately begins forwarding to replicas. Sending data immediately does not reduce the receive rate due to using a switched network with full-duplex links. 1 MB is typically distributed in about 80 ms.
 ## High Availability
 * The master and chunkservers are designed to restore their state and start up in a matter of seconds.
