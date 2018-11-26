@@ -5,7 +5,8 @@ The Google File System (GFS) is a scalable, distributed file system.
 * Writes are typically large, sequential writes that are appended to files. Once written, files are seldom modified again.
 * Most client applications prioritize processing data in bulk at a high rate. Not many have low latency requirements for an individual read/write.
 ## Design
-* Each GFS cluster has a single master and multiple chunk servers (3 replicas at default). 
+* Each GFS cluster has a single master and multiple chunk servers (3 replicas at default).
+![gfs-architecture](https://github.com/jguamie/system-design/blob/master/images/gfs-architecture.png)
 ### Master
 * In terms of data, the master only maintains the file system metadata.
 * The master sends HeartBeat messages to each chunkserver to provide instructions and collect state.
@@ -39,16 +40,15 @@ The Google File System (GFS) is a scalable, distributed file system.
 * GFS accomodates the relaxed consistency model by relying on appends versus overwrites, checkpointing, and writing self-validating, self-identifying records.
 * Each record prepared by the writer contains checksums so the record's validity can be verified.
 ## Leases and Mutation Order
+<img src="https://github.com/jguamie/system-design/blob/master/images/gfs-control-and-data-flow.png" align="middle" width="50%">
 These are the steps in which mutations are applied.
-1. The client requests for the primary chunkserver that hold a lease to a chunk as well as the replicas.
-1. If a chunkserver doesn't have the lease, the master grants a lease to one of the replicas. This replica becomes the primary.
-1. The client caches this lease for future mutations until the lease times out.
+1. The client requests for the primary chunkserver that hold a lease to a chunk as well as the replicas. If a chunkserver doesn't have the lease, the master grants a lease to one of the replicas. This replica becomes the primary.
+1. The master replies with the identity or the primary and the locations of the secondary replicas. The client caches this lease for future mutations until the lease times out.
 1. **Data Flow.** The client pushes the data to all the replicas. Each chunkserver stores the data in an internal LRU buffer cache. The send order does not matter.
-1. **Control Flow.** Once all the replicas acknowledge receiving the data, the client sends a write request to the primary.
-1. The primary assigns a consecutive serial number to the mutation (serialization). It applies the mutation in its own local state in serial number order.
+1. **Control Flow.** Once all the replicas acknowledge receiving the data, the client sends a write request to the primary. The primary assigns a consecutive serial number to the mutation (serialization). It applies the mutation in its own local state in serial number order.
 1. The primary forwards the write request and serial number to all the secondary replicas. Each replica applies the mutation in the same serial number order as the primary.
-1. The secondary replicas reply to the primary indicating the write operation was successful.
-1. The primary replies to the client. Any errors are reported accordingly. If the write failed, the client will retry the operation from step 1.
+1. The secondary replicas reply to the primary indicating the write operation was completed (along with any errors).
+1. The primary replies to the client. Any errors encountered are reported. If the write failed, the client will retry the operation from step 1.
 ## High Availability
 * The master and chunkservers are designed to restore their state and start up in a matter of seconds.
 * The master clones existing replicas as needed. This is to keep chunks replicated as chunkservers go offline or are corrupted.
