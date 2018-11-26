@@ -8,7 +8,7 @@ The Google File System (GFS) is a scalable, distributed file system.
 Each GFS cluster has a single master and multiple chunk servers (3 replicas at default).
 ![gfs-architecture](https://github.com/jguamie/system-design/blob/master/images/gfs-architecture.png)
 ### Master
-* In terms of data, the master only maintains the file system metadata. The master is not involved in common data mutation operations. This allows for a simple, centralized master that does not become a bottleneck.
+* In terms of data, the master is solely responsible for the file system metadata. The master is not involved in common data mutation operations. This allows for a simple, centralized master that does not become a bottleneck.
 * The master sends HeartBeat messages to each chunkserver to provide instructions and collect state.
 * As metadata is minimal compared to chunks, the master is able to keep all metadata in memory. This allows master operations to be fast.
 ### Chunkservers
