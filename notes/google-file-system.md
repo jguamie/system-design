@@ -27,3 +27,14 @@ The Google File System (GFS) is a scalable, distributed file system.
 * The master stays up-to-date on chunk locations through periodic HeartBeat messages.
 #### Operation Log
 * When the operation log becomes large, the master will checkpoint its state.
+* Master startup time is minimized by keeping the log small and replaying from the last checkpoint.
+* The checkpoint is a compact B-tree. Older checkpoints are deleted after the creation of a new checkpoint.
+## Consistency Model
+* GFS has a relaxed consistency model.
+* Mutations to a chunk are applied in the same order across all replicas.
+* Chunk version numbers are used to detect replicas that have become stale. Stale replicas are garbage collected at the earliest opportunity.
+* Whenever a master grants a new lease on a chunk, it increases the chunk version number and informs the replicas. Chunk version numbers are applied and persisted on master and the replicas prior to client notification of the lease.
+* Leases include the chunk version number. Clients and chunkservers can verify the version number prior to performing an operation.
+* The master detects failed chunkservers by detecting data corruption through checksumming.
+* GFS accomodate the relaxed consistency model by relying on appends versus overwrites, checkpointing, and writing self-validating, self-identifying records.
+* Each record prepared by the writer contains checksums so the record's validity can be verified.
