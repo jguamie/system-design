@@ -41,6 +41,7 @@ The Google File System (GFS) is a scalable, distributed file system.
 * Each record prepared by the writer contains checksums so the record's validity can be verified.
 ## Leases and Mutation Order
 <img src="https://github.com/jguamie/system-design/blob/master/images/gfs-control-and-data-flow.png" align="middle" width="50%">
+
 These are the steps in which mutations are applied.
 1. The client requests for the primary chunkserver that hold a lease to a chunk as well as the replicas. If a chunkserver doesn't have the lease, the master grants a lease to one of the replicas. This replica becomes the primary.
 1. The master replies with the identity or the primary and the locations of the secondary replicas. The client caches this lease for future mutations until the lease times out.
