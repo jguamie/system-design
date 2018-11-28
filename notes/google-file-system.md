@@ -31,15 +31,6 @@ Each GFS cluster has a single master and multiple chunk servers (3 replicas at d
 * When the operation log becomes large, the master will checkpoint its state.
 * Master startup time is minimized by keeping the log small and replaying from the last checkpoint.
 * The checkpoint is a compact B-tree. Older checkpoints can be deleted after the creation of a new checkpoint. A few checkpoints are kept to safeguard against catastrophes.
-## Consistency Model
-* GFS has a relaxed consistency model.
-* Mutations to a chunk are applied in the same order across all replicas.
-* Chunk version numbers are used to detect replicas that have become stale. Stale replicas are garbage collected at the earliest opportunity.
-* Whenever a master grants a new lease on a chunk, it increases the chunk version number and informs the replicas. Chunk version numbers are applied on master and replicas prior to notifying the client of the new lease.
-* Leases include the chunk version number. Clients and chunkservers verify the version number prior to performing an operation.
-* The master detects data corruption on chunkservers through checksumming.
-* GFS accomodates the relaxed consistency model by relying on appends versus overwrites, checkpointing, and writing self-validating, self-identifying records.
-* Each record prepared by the writer contains checksums so the record's validity can be verified.
 ## Leases and Mutation Order
 <img src="https://github.com/jguamie/system-design/blob/master/images/gfs-control-and-data-flow.png" align="middle" width="50%">
 
@@ -53,6 +44,15 @@ These are the steps in which mutations are applied.
 1. The primary replies to the client. Any errors encountered are reported. If the write failed, the client will retry the operation from step 1.
 
 Latency is minimized by pipelining data transfers over TCP connections. Once a chunkserver receives some data, it immediately begins forwarding to replicas. Sending data immediately does not reduce the receive rate due to using a switched network with full-duplex links. 1 MB is typically distributed in about 80 ms.
+## Consistency Model
+* GFS has a relaxed consistency model.
+* Mutations to a chunk are applied in the same order across all replicas.
+* Chunk version numbers are used to detect replicas that have become stale. Stale replicas are garbage collected at the earliest opportunity.
+* Whenever a master grants a new lease on a chunk, it increases the chunk version number and informs the replicas. Chunk version numbers are applied on master and replicas prior to notifying the client of the new lease.
+* Leases include the chunk version number. Clients and chunkservers verify the version number prior to performing an operation.
+* The master detects data corruption on chunkservers through checksumming.
+* GFS accomodates the relaxed consistency model by relying on appends versus overwrites, checkpointing, and writing self-validating, self-identifying records.
+* Each record prepared by the writer contains checksums so the record's validity can be verified.
 ## High Availability
 * The master and chunkservers are designed to restore their state and start up in a matter of seconds.
 * The master clones existing replicas as needed. This is to keep chunks replicated as chunkservers go offline or are corrupted.
