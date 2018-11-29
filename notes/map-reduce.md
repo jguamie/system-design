@@ -1,7 +1,7 @@
 # MapReduce
 MapReduce is a programming model and system for processing large data sets.
 ## Overview
-* The model is easy to use as it hides the details of parallelization, fault-tolerance, data distribution, locality optimization, and load balancing. Programmers do not need experience with parallel or distributed systems to use MapReduce.
+* The model is easy to use as it hides the details of parallelization, fault tolerance, data distribution, locality optimization, and load balancing. Programmers do not need experience with parallel or distributed systems to use MapReduce.
 * A typical MapReduce computation processes many terabytes of data. Computations are often performed with 200,000 map tasks and 5,000 reduce tasks using 2,000 worker machines. Each task is about 16 MB to 64 MB of data.
 * Machines are typically dual-processor x86 processors running Linux. Each machine has about 2 GB to 4 GB of memory.
 ## Programming Model
