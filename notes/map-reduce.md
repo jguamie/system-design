@@ -9,7 +9,7 @@ MapReduce is a programming model and system for processing large data sets.
 * **Reduce.** Accepts intermediate pairs and combines shared keys together to produce an output.
 ## Design
 ### Master
-* For each map and reduce task, the master stores the state (Idle, In-progress, or Completed) and worker machine identity.
+* For each map and reduce task, the master stores the state (Idle, In-Progress, or Completed) and worker machine identity.
 * The master assigns tasks to the workers. The master propragates intermediate file locations from map tasks to reduce tasks.
 ## Execution Order
 <img src="https://github.com/jguamie/system-design/blob/master/images/map-reduce-execution-order.png" align="middle" width="90%">
@@ -24,14 +24,14 @@ MapReduce is a programming model and system for processing large data sets.
 ## Fault Tolerance
 ### Worker Failure
 * The master periodically pings every worker. If a worker fails to respond in time:
-  * If tasks have an In-progress state, the master changes the worker's tasks to Idle. Next, the master reschedules the tasks onto other workers.
+  * If tasks have an In-Progress state, the master changes the worker's tasks to Idle. Next, the master reschedules the tasks onto other workers.
   * For map tasks in a Completed state, the tasks need to be rescheduled because the output is on the failed machine's local disk and therefore, it is inaccessible.
   * For reduce tasks in a Completed state, the tasks do not need to be rescheduled as the output is stored on GFS.
 * MapReduce is resilient to a large number of worker failures. In one example, network maintenance caused 80 machines to become unreachable. The MapReduce master rescheduled the tasks onto other machines and was able to successfuly complete the MapReduce operation.
 ### Master Failure
 * The master periodically writes checkpoints for its data structures. If the master dies, a new master will be started from the last checkpointed state. If this fails, the MapReduce computation is aborted and the client will have to retry the MapReduce operation.
 ## Atomic Commits
-* Write outputs by map and reduce tasks are atomic commits. In-progress tasks write output to private temporary files.
+* Write outputs by map and reduce tasks are atomic commits. In-Progress tasks write output to private temporary files.
 * When a map task completes, the worker sends a list of the *R* temporary files to the master. The master records the *R* file names into its data structure. Map tasks produce *R* output files, one per reduce task.
 * When a reduce task completes, the reduce worker atomically renames its temporary output file to the user-defined final output file. Reduce tasks produce one file.
 ## Locality
@@ -42,7 +42,7 @@ MapReduce is a programming model and system for processing large data sets.
 * The number of *M* and *R* tasks should be much larger than the number of worker machines. This will facilitate for each worker to performer many different tasks. This improves dynamic load balancing and speeds up failure recovery.
 ## Backup Tasks
 * A *straggler* is a machine that takes an unusually long time to complete one of the last map or reduce tasks in a computation. Stragglers are the most common cause for significant delays to a MapReduce operation.
-* When a MapReduce operation is near completion, the master schedules backup tasks that are copies of the remaining In-progress tasks. The task is marked as Completed whenever either the primary or backup task completes.
+* When a MapReduce operation is near completion, the master schedules backup tasks that are copies of the remaining In-Progress tasks. The task is marked as Completed whenever either the primary or backup task completes.
 * In a sort program example, MapReduce operations took 44% longer to complete without backup tasks enabled.
 ## Programming Examples
 TBD
