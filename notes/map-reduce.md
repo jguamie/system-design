@@ -9,11 +9,11 @@ MapReduce is a programming model and system for processing large data sets.
 * **Reduce.** Accepts intermediate pairs and combines shared keys together to produce an output.
 ## Design
 ### Master
-For each map and reduce task, the master stores the state (Idle, In-Progress, or Completed) and worker machine identity. The master assigns tasks to the workers. The master propragates intermediate file locations from map tasks to reduce tasks.
+For each map and reduce task, the master stores the state (Idle, In-Progress, or Completed) and worker machine identity. The master assigns tasks to the workers. The master propagates intermediate file locations from map tasks to reduce tasks.
 ## Execution Order
 <img src="https://github.com/jguamie/system-design/blob/master/images/map-reduce-execution-order.png" align="middle" width="90%">
 
-1. MapReduce library in the user program splits input files into *M* tasks. The program copies are started on a cluster of machines.
+1. MapReduce library in the user program splits input files into *M* tasks. Copies of the program are started on a cluster of machines.
 1. One of the program copies becomes the master. The rest become workers. The master assigns *M* map tasks and *R* reduce tasks to the workers.
 1. Map workers read the contents split up from the input. It parses the input to generate input key/value pairs. Next, it passes each input pair into the user-defined Map function. This will output intermediate key/value pairs that are buffered into memory.
 1. Periodically, a map worker writes buffered intermediate pairs to local disk across *R* partitions. The paritioning function is defaulted to ```hash(key) mod R```. The map worker passes the pair disk locations to the master. The master will forward these locations to the reduce workers.
