@@ -25,7 +25,7 @@ For each map and reduce task, the master stores the state (Idle, In-Progress, or
 * The master periodically pings every worker. When a worker fails to respond in time:
   * If the tasks have an In-Progress state, the master changes the worker's tasks to Idle. Next, the master reschedules the tasks onto other workers.
   * For the map tasks in a Completed state, the tasks need to be rescheduled because the output is on the failed machine's local disk--inaccessible.
-  * For the reduce tasks in a Completed state, the tasks do not need to be rescheduled as the output is stored on GFS.
+  * For the reduce tasks in a Completed state, the tasks do not need to be rescheduled as the output is stored on GFS (Google File System).
 * MapReduce is resilient to a large number of worker failures. In one example, network maintenance caused 80 machines to become unreachable. The MapReduce master rescheduled the tasks onto other machines and was able to successfully complete the MapReduce operation.
 ### Master Failure
 The master periodically writes checkpoints for its data structures. If the master dies, a new master will be started from the last checkpointed state. If this fails, the MapReduce computation is aborted and the client will have to retry the MapReduce operation.
