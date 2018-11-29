@@ -31,7 +31,7 @@ For each map and reduce task, the master stores the state (Idle, In-Progress, or
 The master periodically writes checkpoints for its data structures. If the master dies, a new master will be started from the last checkpointed state. If this fails, the MapReduce computation is aborted and the client will have to retry the MapReduce operation.
 ## Atomic Commits
 * Write outputs by map and reduce tasks are atomic commits. In-Progress tasks write output to private temporary files.
-* When a map task completes, the worker sends a list of the *R* temporary files to the master. The master records the *R* file names into its data structure. Map tasks produce *R* output files, one per reduce task.
+* When a map task completes, the worker sends a list of the *R* temporary files to the master. Map tasks produce *R* output files, one per reduce task. The master records the *R* file names into its data structure.
 * When a reduce task completes, the reduce worker atomically renames its temporary output file to the user-defined final output file. Reduce tasks produce one file.
 ## Locality
 * The MapReduce master gets input data location information from GFS. The master will attempt to schedule map tasks on a machine that contain the corresponding input data. If the attempt fails, the master will retry on another replica (GFS maintains copies of data on at least 3 replicas). 
