@@ -34,22 +34,22 @@ The master periodically writes checkpoints for its data structures. If the maste
 * When a map task completes, the worker sends a list of the *R* temporary files to the master. Map tasks produce *R* output files, one per reduce task. The master records the *R* file names into its data structure.
 * When a reduce task completes, the reduce worker atomically renames its temporary output file to the user-defined final output file. Reduce tasks produce one file.
 ## Locality
-* The MapReduce master gets input data location information from GFS. The master will attempt to schedule map tasks on a machine that contain the corresponding input data. If the attempt fails, the master will retry on another replica (GFS maintains copies of data on at least 3 replicas). 
+* The MapReduce master gets input data location information from GFS. The master will attempt to schedule map tasks on a machine that contain the corresponding input data. If the attempt fails, the master will retry on another replica (GFS maintains data copies on at least 3 replicas). 
 * GFS's file chunk size of 64 MB correlates nicely with MapReduce's task size of 16 MB to 64 MB. All MapReduce tasks can be performed on one machine.
 * A majority of input data is read locally and consumes no network bandwidth.
 ## Task Granularity
-The number of *M* and *R* tasks should be much larger than the number of worker machines. This will facilitate for each worker to performer many different tasks. This improves dynamic load balancing and speeds up failure recovery.
+The number of *M* and *R* tasks should be much larger than the number of worker machines. This allows for each worker to perform many different tasks. This improves dynamic load balancing and speeds up failure recovery.
 ## Backup Tasks
-* A *straggler* is a machine that takes an unusually long time to complete one of the last map or reduce tasks in a computation. Stragglers are the most common cause for significant delays to a MapReduce operation.
-* When a MapReduce operation is near completion, the master schedules backup tasks that are copies of the remaining In-Progress tasks. The task is marked as Completed whenever either the primary or backup task completes.
+* A *straggler* is a machine that takes an unusually long time to complete one of its last map or reduce tasks in a computation. Stragglers are the most common cause for significant delays to a MapReduce operation.
+* When a MapReduce operation is near completion, the master schedules backup tasks that are copies of the remaining In-Progress tasks. The task is marked as Completed once either the primary or backup task completes.
 * In a sort program example, MapReduce operations took 44% longer to complete without backup tasks enabled.
 ## Programming Examples
-* **Number of Occurrences.** The map function processes documents and outputs `{word: 1}` pairs for each `word` found in the documents. The reduce function merges the pairs by `word`, sums up the values, and outputs a `{word: count}` pair.
-* **Count of URL Access Frequency.** The map function processes web page request logs and outputs `{url: 1}` pairs. The reduce function merges the pairs by `url`, sums up the values, and outputs a `{url, count}` pair.
+* **Number of Occurrences.** The map function processes documents and outputs `{word: 1}` pairs for each `word` found. The reduce function merges the pairs by `word`, sums up the values, and outputs a `{word: total count}` pair.
+* **Count of URL Access Frequency.** The map function processes web page request logs and outputs `{url: 1}` pairs. The reduce function merges the pairs by `url`, sums up the values, and outputs a `{url, total count}` pair.
 * **Reverse Web-Link Graph.** The map function parses each page and outputs `{target: source}` pairs for each `target` URL found in the page named `source`. The reduce function merges the pairs by `target`, concatenates the list of `source` pages, and outputs a `{target: List(source)}` pair.
-* **Inverted Index.** The map function parses each document and outputs a sequence of `{word: document ID}` pairs. The reduce function merges the pairs by `word`, sorts the corresponding `document ID`s, and outputs a `{word: List(document ID)}` pair.
+* **Inverted Index.** The map function parses each document and outputs a sequence of `{word: document ID}` pairs. The reduce function merges the pairs by `word`, sorts the corresponding `document ID`, and outputs a `{word: List(document ID)}` pair.
 ## Example: Google Web Search Indexing System
 The indexing system needs to regularly process more than 20 terabytes of raw data retrieved by Google's crawling system. Using MapReduce has provided several benefits:
 * The indexing code became simplified and easier to understand as it doesn't need to support distribution, parallelization, or fault tolerance. One phase of the computation dropped from about 3,800 lines of code to about 700 lines of code.
-* Time to implement changes to the indexing process went down. One change that took a few months in the old system only took a few days in the new system.
+* Time to implement changes to the indexing code went down. One change that took a few months in the old system only took a few days in the new system.
 * The system became easier to operate as it didn't need to deal with problems associated with machine failures, slow machines, and networking issues.
