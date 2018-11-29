@@ -45,6 +45,12 @@ MapReduce is a programming model and system for processing large data sets.
 * When a MapReduce operation is near completion, the master schedules backup tasks that are copies of the remaining In-Progress tasks. The task is marked as Completed whenever either the primary or backup task completes.
 * In a sort program example, MapReduce operations took 44% longer to complete without backup tasks enabled.
 ## Programming Examples
-TBD
+* **Number of Occurrences.** The map function processes documents and outputs `{word: 1}` pairs for each `word` found in the documents. The reduce function merges the pairs by `word`, sums up the values, and outputs a `{word: count}` pair.
+* **Count of URL Access Frequency.** The map function processes web page request logs and outputs `{url: 1}` pairs. The reduce function merges the pairs by `url`, sums up the values, and outputs a `{url, count}` pair.
+* **Reverse Web-Link Graph.** The map function parses each page and outputs `{target: source}` pairs for each `target` URL found in the page named `source`. The reduce function merges the pairs by `target`, concatenates the list of `source` pages, and outputs a `{target: List(source)}` pair.
+* **Inverted Index.** The map function parses each document and outputs a sequence of `{word: document ID}` pairs. The reduce function merges the pairs by `word`, sorts the corresponding `document ID`s, and outputs a `{word: List(document ID)}` pair.
 ## Example: Google Web Search Indexing System
-TBD
+The indexing system needs to regularly process more than 20 terabytes of raw data retrieved by Google's crawling system. Using MapReduce has provided several benefits:
+* The indexing code became simplified and easier to understand as it doesn't need to support distribution, parallelization, or fault tolerance. One phase of the computation dropped from about 3,800 lines of code to about 700 lines of code.
+* Time to implement changes to the indexing process went down. One change that took a few months in the old system only took a few days in the new system.
+* The system became easier to operate as it didn't need to deal with problems associated with machine failures, slow machines, and networking issues.
