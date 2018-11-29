@@ -43,7 +43,7 @@ The number of *M* and *R* tasks should be much larger than the number of worker 
 * A *straggler* is a machine that takes an unusually long time to complete one of its last map or reduce tasks in a computation. Stragglers are the most common cause for significant delays to a MapReduce operation.
 * When a MapReduce operation is near completion, the master schedules backup tasks that are copies of the remaining In-Progress tasks. The task is marked as Completed once either the primary or backup task completes.
 * In a sort program example, MapReduce operations took 44% longer to complete without backup tasks enabled.
-## Programming Examples
+## Examples
 * **Number of Occurrences.** The map function processes documents and outputs `{word: 1}` pairs for each `word` found. The reduce function merges the pairs by `word`, sums up the values, and outputs a `{word: total count}` pair.
 * **Count of URL Access Frequency.** The map function processes web page request logs and outputs `{url: 1}` pairs. The reduce function merges the pairs by `url`, sums up the values, and outputs a `{url, total count}` pair.
 * **Reverse Web-Link Graph.** The map function parses each page and outputs `{target: source}` pairs for each `target` URL found in the page named `source`. The reduce function merges the pairs by `target`, concatenates the list of `source` pages, and outputs a `{target: List(source)}` pair.
