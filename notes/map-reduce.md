@@ -22,7 +22,18 @@ MapReduce is a programming model and system for processing large data sets.
 1. The reduce worker passes each unique intermediate key and the corresponding set of values to the user-defined Reduce function. The output is appended to a final output file for the given reduce partition.
 1. When all map and reduce tasks have completed, the master returns the result to the user program. The output is available in 'R' output files, one per reduce task. Each of the file names were specified by the user prior to running the program.
 ## Fault Tolerance
-TBD
+### Worker Failure
+* The master periodically pings every worker. If a worker fails to respond in time:
+  * If tasks have an In-progress state, the master changes the worker's tasks to Idle. Next, the master reschedules the tasks onto other workers.
+  * For map tasks in a Completed state, the tasks need to be rescheduled because the output is on the failed machine's local disk and therefore, it is inaccessible.
+  * For reduce tasks in a Completed state, the tasks do not need to be rescheduled as the output is stored on GFS.
+* MapReduce is resilient to a large number of worker failures. In one example, network maintenance caused 80 machines to become unreachable. The MapReduce master rescheduled the tasks onto other machines and was able to successfuly complete the MapReduce operation.
+### Master Failure
+* The master periodically writes checkpoints for its data structures. If the master dies, a new master will be started from the last checkpointed state. If this fails, the MapReduce computation is aborted and the client will have to retry the MapReduce operation.
+## Atomic Commits
+* Write outputs by map and reduce tasks are atomic commits. In-progress tasks write output to private temporary files.
+* When a map task completes, the worker sends a list of the *R* temporary files to the master. The master records the *R* file names into its data structure. Map tasks produce *R* output files, one per reduce task.
+* When a reduce task completes, the reduce worker atomically renames its temporary output file to the user-defined final output file. Reduce tasks produce one file.
 ## Locality
 * The MapReduce master gets input data location information from GFS. The master will attempt to schedule map tasks on a machine that contain the corresponding input data. If the attempt fails, the master will retry on another replica (GFS maintains copies of data on at least 3 replicas). 
 * GFS's file chunk size of 64 MB correlates nicely with MapReduce's task size of 16 MB to 64 MB. All MapReduce tasks can be performed on one machine.
@@ -30,4 +41,10 @@ TBD
 ## Task Granularity
 * The number of *M* and *R* tasks should be much larger than the number of worker machines. This will facilitate for each worker to performer many different tasks. This improves dynamic load balancing and speeds up failure recovery.
 ## Backup Tasks
+* A *straggler* is a machine that takes an unusually long time to complete one of the last map or reduce tasks in a computation. Stragglers are the most common cause for significant delays to a MapReduce operation.
+* When a MapReduce operation is near completion, the master schedules backup tasks that are copies of the remaining In-progress tasks. The task is marked as Completed whenever either the primary or backup task completes.
+* In a sort program example, MapReduce operations took 44% longer to complete without backup tasks enabled.
+## Programming Examples
+TBD
+## Example: Google Web Search Indexing System
 TBD
