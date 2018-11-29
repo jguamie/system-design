@@ -16,7 +16,7 @@ For each map and reduce task, the master stores the state (Idle, In-Progress, or
 1. MapReduce library in the user program splits input files into *M* tasks. Copies of the program are started on a cluster of machines.
 1. One of the program copies becomes the master. The rest become workers. The master assigns *M* map tasks and *R* reduce tasks to the workers.
 1. Map workers read the contents split up from the input. It parses the input to generate input key/value pairs. Next, it passes each input pair into the user-defined Map function. This will output intermediate key/value pairs that are buffered into memory.
-1. Periodically, a map worker writes buffered intermediate pairs to local disk across *R* partitions. The paritioning function is defaulted to ```hash(key) mod R```. The map worker passes the pair disk locations to the master. The master will forward these locations to the reduce workers.
+1. Periodically, a map worker writes buffered intermediate pairs to local disk across *R* partitions. The partitioning function is defaulted to ```hash(key) mod R```. The map worker passes the pair disk locations to the master. The master will forward these locations to the reduce workers.
 1. Once a reduce worker is notified by the master of the buffered intermediate pair locations, the reduce worker will use an RPC to read the data from the map workers' local disk. Once all intermediate data has been read, it sorts the data by intermediate keys. This will group all identical keys together.
 1. The reduce worker passes each unique intermediate key and the corresponding set of values to the user-defined Reduce function. The output is appended to a final output file for the given reduce partition.
 1. When all map and reduce tasks have completed, the master returns the result to the user program. The output is available in 'R' output files, one per reduce task. Each of the file names were specified by the user prior to running the program.
@@ -26,7 +26,7 @@ For each map and reduce task, the master stores the state (Idle, In-Progress, or
   * If tasks have an In-Progress state, the master changes the worker's tasks to Idle. Next, the master reschedules the tasks onto other workers.
   * For map tasks in a Completed state, the tasks need to be rescheduled because the output is on the failed machine's local disk and therefore, it is inaccessible.
   * For reduce tasks in a Completed state, the tasks do not need to be rescheduled as the output is stored on GFS.
-* MapReduce is resilient to a large number of worker failures. In one example, network maintenance caused 80 machines to become unreachable. The MapReduce master rescheduled the tasks onto other machines and was able to successfuly complete the MapReduce operation.
+* MapReduce is resilient to a large number of worker failures. In one example, network maintenance caused 80 machines to become unreachable. The MapReduce master rescheduled the tasks onto other machines and was able to successfully complete the MapReduce operation.
 ### Master Failure
 The master periodically writes checkpoints for its data structures. If the master dies, a new master will be started from the last checkpointed state. If this fails, the MapReduce computation is aborted and the client will have to retry the MapReduce operation.
 ## Atomic Commits
