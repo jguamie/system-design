@@ -1,6 +1,4 @@
 # Raft Distributed Consensus
-Notes on [Raft: Understandable Distributed Consensus](http://thesecretlivesofdata.com/raft/).
-
 Node can be in three states: Follower, Candidate, or Leader.
 ## Leader
 All change requests go to the *Leader*.
@@ -52,3 +50,5 @@ All change requests go to the *Leader*.
   1. *Leader* with the lower Term ID will step down to a *Follower*.
   1. Nodes in the minority partition will roll back uncommitted log entries and match the new *Leader*'s log.
   1. The logs are now consistent across the cluster.
+# References
+1. [Raft: Understandable Distributed Consensus](http://thesecretlivesofdata.com/raft/).
