@@ -5,7 +5,13 @@ This problem focuses on the ratio of reads to writes for various scenarios. Prim
 #### Post Tweet
 A user can publish a new message to their followers (4.6k RPS on average, 12k RPS at peak).
 #### Home Timeline
-A user can view tweets posted by people they follow (300k RPS).
+A user can view tweets posted by people they follow (300k RPS). In a relational database, the query could be:
+```
+SELECT tweets.*, users.* FROM tweets
+  JOIN users   ON tweets.sender_id    = users.id
+  JOIN follows ON follows.followee_id = users.id
+  WHERE follows.follower_id = current_user
+```
 ### Options
 #### Fan Out on Load
 New tweets are inserted into a global relational database. When a user reads their home timeline, request for new tweets for users they follow from the database.
