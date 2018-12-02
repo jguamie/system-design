@@ -53,3 +53,5 @@ The indexing system needs to regularly process more than 20 terabytes of raw dat
 * The indexing code became simplified and easier to understand as it doesn't need to support distribution, parallelization, or fault tolerance. One phase of the computation dropped from about 3,800 lines of code to about 700 lines of code.
 * Time to implement changes to the indexing code went down. One change that took a few months in the old system only took a few days in the new system.
 * The system became easier to operate as it didn't need to deal with problems associated with machine failures, slow machines, and networking issues.
+# References
+1. [MapReduce: Simplified Data Processing on Large Clusters](http://research.google.com/archive/mapreduce.html)
