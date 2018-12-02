@@ -66,3 +66,5 @@ Latency is minimized by pipelining data transfers over TCP connections. Once a c
 * On error, the client will request data from another replica. The master will clone the chunk from another replica and instruct the chunkserver to delete the corrupted chunk.
 * Checksumming has little effect on read performance. Checksums are only a small amount of extra data for verification.
 * During idle periods, chunkservers verify data blocks of inactive chunks. This addresses detecting corruption in chunks that are rarely used.
+# References
+1. [The Google File System](http://research.google.com/archive/gfs.html)
