@@ -32,6 +32,6 @@ Shorter TTL leads to improved consistency. However, this limits caching and add 
 ## Example: HTTP Cache Headers
 [Increasing Application Performance with HTTP Cache Headers](https://devcenter.heroku.com/articles/increasing-application-performance-with-http-cache-headers)
 # References
-* [Caching - Grokking the System Design Interview](https://www.educative.io/collection/page/5668639101419520/5649050225344512/5643440998055936)
-* [Design Cache - InterviewBit](https://www.interviewbit.com/problems/design-cache/)
-* [Memcached - Wikipedia](https://en.wikipedia.org/wiki/Memcached)
+1. [Caching - Grokking the System Design Interview](https://www.educative.io/collection/page/5668639101419520/5649050225344512/5643440998055936)
+1. [Design Cache - InterviewBit](https://www.interviewbit.com/problems/design-cache/)
+1. [Memcached - Wikipedia](https://en.wikipedia.org/wiki/Memcached)
