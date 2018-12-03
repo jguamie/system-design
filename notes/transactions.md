@@ -45,7 +45,7 @@ A concern with read committed isolation is that it doesn't prevent read skew (no
 Read skew is solved by the next level of transaction isolation. Snapshot isolation is where a transaction takes a consistent snapshot of the database as its first operation and only reads data this snapshot. Even if the data is changed later by another transaction, each transaction will read old data from its snapshot.
 
 Some other databases refer to snapshot isolation with a different name. In Oracle, this is implemented as serializable isolation. In PostgreSQL and MySQL, this is implemented as repeatable read isolation.
-
+#### Multi-Version Concurrency Control (MVCC)
 Snapshot isolation is usually implemented with multi-version concurrency control (MVCC). The database will keep several different committed versions of an object as various in-progress transactions need to read database state at different points in time. Each transaction is always given a unique, always-incrementing transaction ID. 
 
 Whenever a write occurs, the data is tagged with the writer's transaction ID. Whenever a transaction reads from the database, any writes made by transactions with a later transaction ID are ignored. Whenever a transactions deletes data, the row isn't actually deleted. Instead, it is marked for deletion by setting the `deleted_by` field to the transaction ID.
