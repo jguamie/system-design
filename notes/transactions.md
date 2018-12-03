@@ -8,7 +8,7 @@ Databases that are not ACID-compliant are called BASE: *Basically Available, Sof
 ### Atomicity
 Atomicity is the ability to abort a transaction on error and undo any writes that have been made so far. *Abortability* would have been better to describe the *A* in ACID.
 
-This is not to be confused with atomic operation in multi-theaded programming. An atomic operation is where if one thread executes an atomic operation, another thread could not see half-finished results from that operation.
+This is not to be confused with atomic operation in multi-threaded programming. An atomic operation is where if one thread executes an atomic operation, another thread could not see half-finished results from that operation.
 
 Atomicity can be implemented using a log such as B-trees for crash recovery.
 ### Consistency
@@ -40,18 +40,46 @@ Most databases prevent dirty reads by remembering both the old committed value a
 
 Read locks are rarely used as it harms the response time for read-only transactions. One long write transaction can force many read-only transactions to wait until the write transaction is completed.
 #### Read Skew (Nonrepeatable Reads)
-A concern with read committed isolation is that it doesn't prevent read skew (nonrepeatable reads). Read skew happens when a transaction is writing to multiple objects across the database. Then, a second transaction reads new data in one part of the database and old data in other parts. This causes the second transaction to see inconsistencies in the database.
+Read committed isolation doesn't prevent read skew (nonrepeatable reads). Read skew happens when a transaction is writing to multiple objects across the database. Then, a second transaction reads new data in one part of the database and old data in other parts. This causes the second transaction to see inconsistencies in the database. This is solved by snapshot isolation.
 ### Snapshot Isolation
-Read skew is solved by the next level of transaction isolation. Snapshot isolation is where a transaction takes a consistent snapshot of the database as its first operation and only reads data this snapshot. Even if the data is changed later by another transaction, each transaction will read old data from its snapshot.
+Snapshot isolation is where a transaction takes a consistent snapshot of the database as its first operation and only reads data this snapshot. Even if the data is changed later by another transaction, each transaction will read old data from its snapshot.
 
 Some other databases refer to snapshot isolation with a different name. In Oracle, this is implemented as serializable isolation. In PostgreSQL and MySQL, this is implemented as repeatable read isolation.
 #### Multi-Version Concurrency Control (MVCC)
 Snapshot isolation is usually implemented with multi-version concurrency control (MVCC). The database will keep several different committed versions of an object as various in-progress transactions need to read database state at different points in time. Each transaction is always given a unique, always-incrementing transaction ID. 
 
-Whenever a write occurs, the data is tagged with the writer's transaction ID. Whenever a transaction reads from the database, any writes made by transactions with a later transaction ID are ignored. Whenever a transactions deletes data, the row isn't actually deleted. Instead, it is marked for deletion by setting the `deleted_by` field to the transaction ID.
+Whenever a write occurs, the data is tagged with the writer's transaction ID. Whenever a transaction reads from the database, any writes made by transactions with a later transaction ID are ignored. Whenever a transaction deletes data, the row isn't actually deleted. Instead, it is marked for deletion by setting the `deleted_by` field to the transaction ID.
 
 A garbage collection process will periodically remove old object versions and delete objects marked for deletion when they are no longer visible to any transactions.
+#### Lost Updates
+Lost updates are when two transactions concurrently perform a read-modify-write cycle. Then, one transaction overwrites the other's write without incorporating its changes causing data loss. **TODO. TBD.**
+#### Write Skew
+Snapshot isolation doesn't prevent write skew. Write skew happens when a transaction reads an object, makes a decision based on the data, and writes its decision to the database. However, by the time the decision is committed, the initially-read object has changed causing the premise of the decision to be false. Only serializable isolation prevents write skew.
+#### Phantom Reads
+Phantom reads happen when a transaction reads objects that match a search condition. Then, another transaction commits a write that changes the results of that search. Snapshot serialization prevents standard phantom reads but 2PL's index-ranged locks are required to prevent phantoms and write skew.
 ### Serializable Isolation
 Serializable isolation is the strongest isolation level. It guarantees that even if transactions are run in parallel (concurrently), the end result is the same as if they were run one at a time (serially). This isolation level prevents all possible race conditions.
+#### Actual Serial Execution
+The simplest way to implement serializable isolation is to remove concurrency entirely. That is, to execute each transaction one at a time, in serial order, on a single thread. Multi-threaded concurrency was considered essential for good performance but cheaper, large-sized RAM has made single-threaded execution possible. Today, it is feasible to keep an entire active dataset in memory. Transactions in memory execute much faster than from disk. Redis uses this approach. As throughput is limited to a single CPU core, transactions need to be structured differently to make the most of that single thread.
+
+Partitioning data across multiple nodes can allow scaling to multiple CPU cores but require either:
+1. Transactions to only read and write data from a single partition so that cross-parition coordination will not be necessary.
+1. The database to coordinate transactions across all partitions that the transaction touches.
+
+Key-value data can be partitioned easily. Data with multiple secondary indexes will require a lot of cross-partition coordination.
+#### Two-Phase Locking (2PL)
+In two-phase locking (2PL), several transactions are allowed to concurrently read the same object as long as no transaction is writing to it. If a transaction wants to read from an object, it must wait for any transaction writing to the object to commit or abort. Also, vice versa is true: if a transaction wants to write to an object, it must wait for all transactions reading from the object to commit or abort. MySQL (InnoDB) and SQL Server use 2PL.
+
+2PL is implemented using shared locks and exclusive locks. The locks are implemented as follows:
+* When a transaction wants to read an object, it must first acquire a shared lock. It must wait on any existing exclusive lock on the object. Other transactions reading from the same object can also acquire the shared lock simultaneously.
+* When a transaction wants to write to an object, it must first acquire an exclusive lock. It must wait on any existing lock (shared or exclusive) on the object.
+* When a transaction first reads and then writes to an object, it can upgrade its shared lock to an exclusive lock. It must wait on any transactions that have the shared lock on the same object.
+* After a transaction acquires a lock, it must hold onto the lock until it commits or aborts.
+
+Deadlocks easily occur when a transaction is stuck waiting for another transaction to release its lock, and vice versa. The database detects deadlocks between transactions and aborts one so that the other can make progress. The application will retry the aborted transaction.
+
+To protect against phantoms and write skew, databases with 2PL use index-ranged locks (next-key locks). These work just like shared or exclusive locks but applied across a range of objects versus only one object.
+
+2PL has significantly worse performance with transaction throughput and response times versus weak isolation. This is due to the overhead of acquiring/releasing locks and reduced concurrency.
 # References
 1. [Chapter 7, Transactions - Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321) Chapters 1-3, 5-9 only
