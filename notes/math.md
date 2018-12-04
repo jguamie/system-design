@@ -12,7 +12,7 @@ Powers of 2 | Decimal | Bytes | Words
 2<sup>8</sup> | 256 | 1 byte | -
 2<sup>16</sup> | 65,536 | 2 bytes | 65 thousand
 2<sup>24</sup> | 16,777,216 | 3 bytes | 16 million
-2<sup>32</sup> | 4,294,967,296 | 4 bytes | 4 million
+2<sup>32</sup> | 4,294,967,296 | 4 bytes | 4 billion
 2<sup>40</sup> | 1,099,511,627,776 | 5 bytes | 1 trillion
 2<sup>48</sup> | - | 6 bytes | 281 trillion
 2<sup>56</sup> | - | 7 bytes | 72 quadillion
