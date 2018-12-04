@@ -45,7 +45,6 @@ Snapshot isolation is where a transaction will only read data from a historical 
 Some other databases refer to snapshot isolation with a different name. In Oracle, this is implemented as serializable isolation. In PostgreSQL and MySQL, this is implemented as repeatable read isolation.
 #### Multi-Version Concurrency Control (MVCC)
 Snapshot isolation is usually implemented with multi-version concurrency control (MVCC). The database will keep several different committed versions of an object as various in-progress transactions need to read database state at different points in time. Each transaction is always given a unique, always-incrementing transaction ID. 
-
 ##### Modifications
 Whenever a write occurs, the data is tagged with the writer's transaction ID. Whenever a transaction reads from the database, any writes made by transactions with a later transaction ID are ignored. 
 
@@ -64,9 +63,9 @@ UPDATE counters SET value = value + 1 WHERE key = 'foo'
 ```
 Atomic updated operations are implemented by acquiring an exclusive lock on the object when it is read until the update has been committed (cursor stability). This prevents other transactions from reading the same object. Relational databases, Redis, and MongoDB provide atomic updates.
 ##### Automatic Detection
-Another solution is to have a transaction manager that detects lost updates. If one occurs, abort the offending transaction and force it to retry its read-modify-write cycle. Snapshot isolation needs to be enabled for this check to be implemented efficiently. PostgreSQL, Oracle, and SQL Server snapshot isolation levels automatically detect when a lost update has occurred and abort the offending transaction. MySQL (InnoDB) does not prevent lost updates.
+Another solution is to have a transaction manager that detects lost updates. If one occurs, the transaction manager will abort the offending transaction and force it to retry its read-modify-write cycle. Snapshot isolation needs to be enabled for this check to be implemented efficiently. PostgreSQL, Oracle, and SQL Server snapshot isolation levels automatically detect when a lost update has occurred and abort the offending transaction. MySQL (InnoDB) does not automatically detect lost updates.
 ##### Conflict Resolution (Replication)
-Replicated databases allow concurrent writes to create several conflicting versions of an object (siblings). These databases use application code or special data structures to resolve and merge these versions afterwards. 
+Replicated databases allow concurrent writes to create several conflicting versions of an object (siblings). These databases use application code or special data structures to resolve and merge these versions afterwards.
 #### Write Skew
 Snapshot isolation doesn't prevent write skew. Write skew happens when a transaction reads an object, makes a decision based on the data, and writes its decision to the database. However, by the time the decision is committed, the initially-read object has changed causing the premise of the decision to be false. Only serializable isolation prevents write skew.
 #### Phantoms
@@ -77,17 +76,17 @@ Serializable isolation is the strongest isolation level. It guarantees that even
 The simplest way to implement serializable isolation is to remove concurrency entirely. That is, to execute each transaction one at a time, in serial order, on a single thread. Multi-threaded concurrency was considered essential for good performance but cheaper, large-sized RAM has made single-threaded execution possible. Today, it is feasible to keep an entire active dataset in memory. Transactions in memory execute much faster than from disk. Redis uses this approach. As throughput is limited to a single CPU core, transactions need to be structured differently to make the most of that single thread.
 
 Partitioning data across multiple nodes can allow scaling to multiple CPU cores but require either:
-1. Transactions to only read and write data from a single partition so that cross-partition coordination will not be necessary.
-1. The database to coordinate transactions across all partitions that the transaction touches.
+1. Transactions only read and write data from a single partition so that cross-partition coordination will not be necessary.
+1. The database system to coordinate transactions across all partitions that the transaction touches.
 
-Key-value data can be partitioned easily. Data with multiple secondary indexes will require a lot of cross-partition coordination.
+Key-value data can be partitioned easily. Data with multiple secondary indexes will generally require cross-partition coordination.
 #### Two-Phase Locking (2PL)
-In two-phase locking (2PL), several transactions are allowed to concurrently read the same object as long as no transaction is writing to it. If a transaction wants to read from an object, it must wait for any transaction writing to the object to commit or abort. Also, vice versa is true: if a transaction wants to write to an object, it must wait for all transactions reading from the object to commit or abort. MySQL (InnoDB) and SQL Server use 2PL.
+In two-phase locking (2PL), several transactions are allowed to concurrently read from the same object as long as no transaction is writing to it. If a transaction wants to read from an object, it must wait for any transaction writing to the object to commit or abort. Also, vice versa is true: if a transaction wants to write to an object, it must wait for all transactions reading from the object to commit or abort. MySQL (InnoDB) and SQL Server use 2PL.
 
 2PL is implemented using shared locks and exclusive locks. The locks are implemented as follows:
-* When a transaction wants to read an object, it must first acquire a shared lock. It must wait on any existing exclusive lock on the object. Other transactions reading from the same object can also acquire the shared lock simultaneously.
-* When a transaction wants to write to an object, it must first acquire an exclusive lock. It must wait on any existing lock (shared or exclusive) on the object.
-* When a transaction first reads and then writes to an object, it can upgrade its shared lock to an exclusive lock. It must wait on any transactions that have the shared lock on the same object.
+* When a transaction wants to read an object, it must acquire a shared lock. It must wait on any existing exclusive lock on the object. Other transactions reading from the same object can also acquire the shared lock simultaneously.
+* When a transaction wants to write to an object, it must acquire an exclusive lock. It must wait on any existing lock (shared or exclusive) on the object.
+* When a transaction first reads and then writes to an object, it can upgrade its shared lock to an exclusive lock. It must wait on any transactions that have the shared lock on the same object to complete.
 * After a transaction acquires a lock, it must hold onto the lock until it commits or aborts.
 
 Deadlocks easily occur when a transaction is stuck waiting for another transaction to release its lock, and vice versa. The database detects deadlocks between transactions and aborts one so that the other can make progress. The application will retry the aborted transaction.
