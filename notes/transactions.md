@@ -46,9 +46,14 @@ Some other databases refer to snapshot isolation with a different name. In Oracl
 #### Multi-Version Concurrency Control (MVCC)
 Snapshot isolation is usually implemented with multi-version concurrency control (MVCC). The database will keep several different committed versions of an object as various in-progress transactions need to read database state at different points in time. Each transaction is always given a unique, always-incrementing transaction ID. 
 
-Whenever a write occurs, the data is tagged with the writer's transaction ID. Whenever a transaction reads from the database, any writes made by transactions with a later transaction ID are ignored. Whenever a transaction deletes data, the row isn't actually deleted. Instead, it is marked for deletion by setting the `deleted_by` field to the transaction ID.
+##### Modifications
+Whenever a write occurs, the data is tagged with the writer's transaction ID. Whenever a transaction reads from the database, any writes made by transactions with a later transaction ID are ignored. 
 
-A garbage collection process will periodically remove old object versions and delete objects marked for deletion when they are no longer visible to any transactions.
+A garbage collection process will periodically remove old object versions when they are no longer visible to any transactions.
+##### Deletions
+Whenever a transaction deletes data, the row isn't actually deleted. Instead, it is marked for deletion by setting the `deleted_by` field to the transaction ID.
+
+A garbage collection process will periodically delete objects marked for deletion when they are no longer visible to any transactions.
 #### Lost Updates
 Lost updates are when two transactions concurrently read an object, modify it, and write back the modified object (read-modify-write cycle). One of the modifications is lost as the second write does not include the first modification. The later write clobbers the earlier write.
 
