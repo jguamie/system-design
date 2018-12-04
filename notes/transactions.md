@@ -19,8 +19,6 @@ The *C* doesn't really belong in ACID. Consistency is a property of the applicat
 This is not to be confused with replica consistency and eventual consistency (replication), consistent hashing (partitioning), and consistency in the CAP theorem.
 ### Isolation
 Isolation is where each transaction running concurrently with other transactions cannot interfere with each other. When transactions have been committed, the result should be identical to if they were run one after another (serially) even if they were run concurrently.
-
-Isolation can be implemented using a lock on each object so only one thread can access an object at a time.
 ### Durability
 Durability is the guarantee that once a transaction has been committed, the data will never be lost. It would safeguard against any hardware faults, database crashes, etc.
 ## Isolation Levels
