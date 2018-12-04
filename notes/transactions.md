@@ -52,11 +52,22 @@ Whenever a write occurs, the data is tagged with the writer's transaction ID. Wh
 
 A garbage collection process will periodically remove old object versions and delete objects marked for deletion when they are no longer visible to any transactions.
 #### Lost Updates
-Lost updates are when two transactions concurrently perform a read-modify-write cycle. Then, one transaction overwrites the other's write without incorporating its changes causing data loss. **TODO. TBD.**
+Lost updates are when two transactions concurrently read an object, modify it, and write back the modified object (read-modify-write cycle). One of the modifications is lost as the second write does not include the first modification. The later write clobbers the earlier write.
+
+##### Atomic Update Operations
+To prevent lost updates, many databases provide atomic update operations. Applications are expected to use atomic updates instead of read-modify-write cycles. For example, the following is a standard update instruction in relational databases:
+```
+UPDATE counters SET value = value + 1 WHERE key = 'foo'
+```
+Atomic updated operations are implemented by acquiring an exclusive lock on the object when it is read until the update has been committed (cursor stability). This prevents other transactions from reading the same object. Relational databases, Redis, and MongoDB provide atomic updates.
+##### Automatic Detection
+Another solution is to have a transaction manager that detects lost updates. If one occurs, abort the offending transaction and force it to retry its read-modify-write cycle. Snapshot isolation needs to be enabled for this check to be implemented efficiently. PostgreSQL, Oracle, and SQL Server snapshot isolation levels automatically detect when a lost update has occurred and abort the offending transaction. MySQL (InnoDB) does not prevent lost updates.
+##### Conflict Resolution (Replication)
+Replicated databases allow concurrent writes to create several conflicting versions of an object (siblings). These databases use application code or special data structures to resolve and merge these versions afterwards. 
 #### Write Skew
 Snapshot isolation doesn't prevent write skew. Write skew happens when a transaction reads an object, makes a decision based on the data, and writes its decision to the database. However, by the time the decision is committed, the initially-read object has changed causing the premise of the decision to be false. Only serializable isolation prevents write skew.
-#### Phantom Reads
-Phantom reads happen when a transaction reads objects that match a search condition. Then, another transaction commits a write that changes the results of that search. Snapshot serialization prevents standard phantom reads but 2PL's index-ranged locks are required to prevent phantoms and write skew.
+#### Phantoms
+Phantoms happen when a transaction reads objects that match a search condition. Then, another transaction commits a write that changes the results of that search. Snapshot serialization prevents standard phantom reads but 2PL's index-ranged locks are required to prevent phantoms and write skew.
 ### Serializable Isolation
 Serializable isolation is the strongest isolation level. It guarantees that even if transactions are run in parallel (concurrently), the end result is the same as if they were run one at a time (serially). This isolation level prevents all possible race conditions.
 #### Actual Serial Execution
