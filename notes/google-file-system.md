@@ -51,7 +51,7 @@ Latency is minimized by pipelining data transfers over TCP connections. Once a c
 * Whenever a master grants a new lease on a chunk, it increases the chunk version number and informs the replicas. Chunk version numbers are applied on master and replicas prior to notifying the client of the new lease.
 * Leases include the chunk version number. Clients and chunkservers verify the version number prior to performing an operation.
 * The master detects data corruption on chunkservers through checksumming.
-* GFS accomodates the relaxed consistency model by relying on appends versus overwrites, checkpointing, and writing self-validating, self-identifying records.
+* GFS accommodates the relaxed consistency model by relying on appends versus overwrites, checkpointing, and writing self-validating, self-identifying records.
 * Each record prepared by the writer contains checksums so the record's validity can be verified.
 ## High Availability
 * The master and chunkservers are designed to restore their state and start up in a matter of seconds.
@@ -65,6 +65,6 @@ Latency is minimized by pipelining data transfers over TCP connections. Once a c
 * If a block doesn't match the checksum, chunkserver returns an error to the requestor and reports a mismatch to the master.
 * On error, the client will request data from another replica. The master will clone the chunk from another replica and instruct the chunkserver to delete the corrupted chunk.
 * Checksumming has little effect on read performance. Checksums are only a small amount of extra data for verification.
-* During idle periods, chunkservers verify data blocks of inactive chunks. This addresses detecting corruption in chunks that are rarely used.
+* During idle periods, chunkservers verify data blocks of inactive chunks. This solves for detecting corruption in chunks that are rarely used.
 # References
 1. [The Google File System](http://research.google.com/archive/gfs.html)
