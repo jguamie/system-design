@@ -69,7 +69,7 @@ Replicated databases allow concurrent writes to create several conflicting versi
 #### Write Skew
 Write skew happens when a transaction reads an object, makes a decision based on the data, and writes its decision to the database. However, by the time the decision is committed, another transaction has changed the initially-read object causing the premise of the decision to be false. Snapshot isolation doesn't prevent write skew. Only serializable isolation prevents write skew.
 #### Phantoms
-Phantoms happen when a transaction reads objects that match a search condition, then another transaction commits a write that changes the results of that search. Snapshot serialization prevents standard phantom reads but 2PL's index-ranged locks are required to prevent phantoms and write skew.
+Phantoms happen when a transaction reads objects that match a search query, then another transaction commits a write that changes the results of that search. Snapshot serialization prevents standard phantom reads but 2PL's index-ranged locks are required to prevent phantoms and write skew.
 ### Serializable Isolation
 Serializable isolation is the strongest isolation level. It guarantees that even if transactions are run in parallel (concurrently), the end result is the same as if they were run one at a time (serially). This isolation level prevents all possible race conditions.
 #### Actual Serial Execution
