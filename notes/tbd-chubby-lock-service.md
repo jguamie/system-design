@@ -1,2 +1,0 @@
-# Chubby Lock Service
-TBD
