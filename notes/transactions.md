@@ -74,7 +74,7 @@ Serializable isolation is the strongest isolation level. It guarantees that even
 The simplest way to implement serializable isolation is to remove concurrency entirely. That is, to execute each transaction one at a time, in serial order, on a single thread. Multi-threaded concurrency was considered essential for good performance but cheaper, large-sized RAM has made single-threaded execution possible. Today, it is feasible to keep an entire active dataset in memory. Transactions in memory execute much faster than from disk. Redis uses this approach. As throughput is limited to a single CPU core, transactions need to be structured differently to make the most of that single thread.
 
 Partitioning data across multiple nodes can allow scaling to multiple CPU cores but require either:
-1. Transactions to only read and write data from a single partition so that cross-parition coordination will not be necessary.
+1. Transactions to only read and write data from a single partition so that cross-partition coordination will not be necessary.
 1. The database to coordinate transactions across all partitions that the transaction touches.
 
 Key-value data can be partitioned easily. Data with multiple secondary indexes will require a lot of cross-partition coordination.
@@ -89,7 +89,7 @@ In two-phase locking (2PL), several transactions are allowed to concurrently rea
 
 Deadlocks easily occur when a transaction is stuck waiting for another transaction to release its lock, and vice versa. The database detects deadlocks between transactions and aborts one so that the other can make progress. The application will retry the aborted transaction.
 
-To protect against phantoms and write skew, databases with 2PL use index-ranged locks (next-key locks). These work just like shared or exclusive locks but applied across a range of objects versus only one object.
+To protect against phantoms and write skew, databases with 2PL use index-ranged locks (next-key locks). These work similarly to shared or exclusive locks but are applied across a range of objects versus a single object.
 
 2PL has significantly worse performance with transaction throughput and response times versus weak isolation. This is due to the overhead of acquiring/releasing locks and reduced concurrency.
 # References
