@@ -38,7 +38,7 @@ Most databases prevent dirty reads by remembering both the old committed value a
 
 Read locks are rarely used as it harms the response time for read-only transactions. One long write transaction can force many read-only transactions to wait until the write transaction is completed.
 #### Read Skew (Nonrepeatable Reads)
-Read committed isolation doesn't prevent read skew (nonrepeatable reads). Read skew happens when a transaction is writing to multiple objects and in parallel, a second transaction reads the new data in some objects and old data in other objects. This causes the second transaction to see inconsistencies in the database. This is solved by snapshot isolation.
+Read skew happens when a transaction is writing to multiple objects and in parallel, a second transaction reads the new data in some objects and old data in other objects. This causes the second transaction to see inconsistencies in the database. Read committed isolation doesn't prevent read skew (nonrepeatable reads). This is solved by snapshot isolation.
 ### Snapshot Isolation
 Snapshot isolation is where a transaction will only read data from a historical database state of when the transaction began. Even if data is changed later by another transaction, each transaction will read old data from its specific    snapshot.
 
@@ -67,7 +67,7 @@ Another solution is to have a transaction manager that detects lost updates. If 
 ##### Conflict Resolution (Replication)
 Replicated databases allow concurrent writes to create several conflicting versions of an object (siblings). These databases use application code or special data structures to resolve and merge these versions afterwards.
 #### Write Skew
-Snapshot isolation doesn't prevent write skew. Write skew happens when a transaction reads an object, makes a decision based on the data, and writes its decision to the database. However, by the time the decision is committed, the initially-read object has changed causing the premise of the decision to be false. Only serializable isolation prevents write skew.
+Write skew happens when a transaction reads an object, makes a decision based on the data, and writes its decision to the database. However, by the time the decision is committed, another transaction has changed the initially-read object causing the premise of the decision to be false. Snapshot isolation doesn't prevent write skew. Only serializable isolation prevents write skew.
 #### Phantoms
 Phantoms happen when a transaction reads objects that match a search condition, then another transaction commits a write that changes the results of that search. Snapshot serialization prevents standard phantom reads but 2PL's index-ranged locks are required to prevent phantoms and write skew.
 ### Serializable Isolation
