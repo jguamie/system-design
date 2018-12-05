@@ -9,7 +9,7 @@ Key range partitioning is where keys are sorted and partitioned by a range of ke
 
 With this approach, a partition can have disproportionately high load (a hot spot). In some cases, all load could end up on one partition. This would happen when a specific range of keys become very popular. To mitigate this risk, partitions can be rebalanced by splitting a range into two subranges (1 partition divided into 2 partitions).
 
-In another case, if the database is partitioned by timestamp, all writes would go to the same partition (the one for today). This is mitigated by prefixing the timestamp key with some attribute. For example, the key could be prefixed with a user/component name so that the load is distributed by this name instead of the timestamp.
+In another case, if the database is partitioned by timestamp, all writes would go to the same partition (the one for today). This is mitigated by prefixing the timestamp key with some attribute. For example, the key could be prefixed with a user or component name so that the load is distributed by this name instead of the timestamp.
 ### Hash Partitioning
 Hash partitioning is where a hash function is applied to each key and partitioned by a range of hashes (instead of range of keys). This approach is used to uniformly distribute data and minimize hot spots. Key range queries become inefficient as there is no ordering of keys. Hash partitioning can be implemented as consistent hashing or rendezvous hashing.
 
