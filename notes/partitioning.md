@@ -16,7 +16,7 @@ Partitioning becomes more complicated when secondary indexes are involved. The s
 ### Document-Based Partitioning
 Document-based partitioning (local indexes) are where the secondary indexes are stored in the same partition as the primary key and value. Each partition only maintains the secondary indexes of the datasets it controls. On write, only a single partition needs to be updated. On read, secondary indexes must be gathered across ALL partitions (scatter/gather). This makes read queries on secondary indexes very expensive.
 ### Term-Based Partitioning
-Term-based partitioning (global index) are where secondary indexes are partitioned separately. A global index is partitioned, but different from the partitioning approach used for the primary index. On write, several partitions of the secondary index must be updated. On read, data can be served from a single partition. This makes read queries on secondary indexes efficient. At the same time, writes to secondary indexes become slower and more complicated.
+Term-based partitioning (global indexes) are where secondary indexes are partitioned separately. A global index is partitioned, but different from the partitioning approach used for the primary index. On write, several partitions of the secondary index must be updated. On read, data can be served from a single partition. This makes read queries on secondary indexes efficient. At the same time, writes to secondary indexes become slower and more complicated.
 
 DynamoDB uses global indexes. Updates to secondary indexes are asynchronous and therefore, eventually consistent.
 # References
