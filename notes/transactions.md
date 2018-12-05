@@ -91,7 +91,7 @@ In two-phase locking (2PL), several transactions are allowed to concurrently rea
 
 Deadlocks easily occur when a transaction is stuck waiting for another transaction to release its lock, and vice versa. The database detects deadlocks between transactions and aborts one so that the other can make progress. The application will retry the aborted transaction.
 
-To protect against phantoms and write skew, databases with 2PL use index-ranged locks (next-key locks). These work similarly to shared or exclusive locks but are applied across a range of indexes versus a single object.
+To protect against phantoms and write skew, databases with 2PL use index-ranged locks (next-key locks). This works similarly to shared or exclusive locks but is applied across a range of indexes versus a single object.
 
 2PL has significantly worse performance with transaction throughput and response times versus weak isolation. This is due to the overhead of acquiring/releasing locks and reduced concurrency.
 # References
