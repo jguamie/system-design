@@ -13,6 +13,7 @@
 1. [Twitter - My Notes](https://github.com/jguamie/system-design/blob/master/notes/twitter.md)
 ## Week 4 (2018 Nov 17)
 1. [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321), Chapter 6: Partitioning
+	* [Partitioning - My Notes](https://github.com/jguamie/system-design/blob/master/notes/partitioning.md)
 1. [Building Software Systems At Google and Lessons Learned - Jeff Dean Video](https://youtu.be/modXC5IWTJI)
 1. [The Google File System](https://ai.google/research/pubs/pub51)
 	* [GFS - My Notes](https://github.com/jguamie/system-design/blob/master/notes/google-file-system.md)
