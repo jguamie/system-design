@@ -31,7 +31,7 @@ All change requests go to the *Leader*.
   1. Election Term will continue until a *Follower* stops receiving heartbeats (Append Entries messages).
     * *Followers* becomes a *Candidate* if it hasn't received a heartbeat by the time its election timeout runs out.
 ## Split Vote Issue
-  1. If vote are split evenly, election timeout causes another node to become a *Candidate*.
+  1. If votes are split evenly, election timeout causes another node to become a *Candidate*.
   1. It sends out Request Vote message to other nodes for a new Term ID.
 ## Log Replication
   1. *Leader* sends out changes via the Append Entries messages on the next heartbeat.
