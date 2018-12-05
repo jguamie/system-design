@@ -2,19 +2,19 @@
 ## Week 1 (2018 Oct 27)
 1. [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321), Chapters 1-2: Reliable, Scalable, and Maintainable Applications; Data Models and Query Languages
 1. [System Design Math - My Notes](https://github.com/jguamie/system-design/blob/master/notes/math.md)
-1. [Raft Distributed Consensus - My Notes](https://github.com/jguamie/system-design/blob/master/notes/raft-distributed-consensus.md)
-1. [Rendezvous Hashing - Wikipedia](https://en.wikipedia.org/wiki/Rendezvous_hashing)
+1. [Building Software Systems At Google and Lessons Learned - Jeff Dean Video](https://youtu.be/modXC5IWTJI)
+1. [Twitter - My Notes](https://github.com/jguamie/system-design/blob/master/notes/twitter.md)
 ## Week 2 (2018 Nov 3)
 1. [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321), Chapter 3: Storage and Retrieval
 1. [Caching - My Notes](https://github.com/jguamie/system-design/blob/master/notes/caching.md)
 1. [What happens when you type google.com into your browser?](https://github.com/alex/what-happens-when)
 ## Week 3 (2018 Nov 10)
 1. [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321), Chapter 5: Replication
-1. [Twitter - My Notes](https://github.com/jguamie/system-design/blob/master/notes/twitter.md)
+1. [Raft Distributed Consensus - My Notes](https://github.com/jguamie/system-design/blob/master/notes/raft-distributed-consensus.md)
 ## Week 4 (2018 Nov 17)
 1. [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321), Chapter 6: Partitioning
 	* [Partitioning - My Notes](https://github.com/jguamie/system-design/blob/master/notes/partitioning.md)
-1. [Building Software Systems At Google and Lessons Learned - Jeff Dean Video](https://youtu.be/modXC5IWTJI)
+1. [Rendezvous Hashing - Wikipedia](https://en.wikipedia.org/wiki/Rendezvous_hashing)
 1. [The Google File System](https://ai.google/research/pubs/pub51)
 	* [GFS - My Notes](https://github.com/jguamie/system-design/blob/master/notes/google-file-system.md)
 1. [Chubby: A Lock Service for Loosely-Coupled Distributed Systems](https://ai.google/research/pubs/pub27897)
