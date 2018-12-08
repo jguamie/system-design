@@ -14,7 +14,8 @@ When a node goes down, this same method is used to restore a node.
 ### Leader Failover
 Refer to the notes on [Raft Distributed Consensus](https://github.com/jguamie/system-design/blob/master/notes/raft-distributed-consensus.md).
 ### Synchronous vs. Asynchronous Replication
-In synchronous replication, the leader waits until the follower has confirmed that it received the write before reporting success to the client and making the write visible to other clients. In asynchronous replication, the leader sends the write to the follower but doesn't wait for a response from the follower.
+In synchronous replication, the leader waits until the follower has confirmed that it received the write before reporting success to the client and making the write visible to other clients. In asynchronous replication, the leader sends the write to the follower but doesn't wait for a response from the follower.  <br />
+<img src="https://github.com/jguamie/system-design/blob/master/images/replication-2.png" align="middle" width="70%">
 
 It is impractical for all followers to be synchronous as one node outage would cause the whole system to stall. In practice, only one of the followers is synchronous while the others are asynchronous. If the synchronous follower becomes slow or unresponsive, one of the asynchronous followers is changed to be synchronous. In this scenario, at least two nodes are guaranteed to have an up-to-date copy of the data (semi-synchronous). Fully asynchronous systems are also used in practice.
 ### Eventual Consistency
@@ -23,11 +24,15 @@ The delay between a write on the leader and replicated onto a follower is known 
 Read-after-write consistency (or read-your-writes consistency) is a guarantee that clients will always see any updates they've made. This is implemented as follows:
 1. When a client sends read requests for data it previously modified, the leader will process the request.
 1. If the time between the read request and the last update is within one minute, the leader must process the request.
-1. For more fine-grained control, monitor the replication lag on followers. If the time between the read request and the last update is within the replication lag window, the leader must process the request.
+1. For more fine-grained control, monitor the replication lag on followers. If the time between the read request and the last update is within the replication lag window, the leader must process the request.  <br />
+<img src="https://github.com/jguamie/system-design/blob/master/images/replication-3.png" align="middle" width="70%">
+
 ### Monotonic Reads Consistency
-When reading from multiple asynchronous followers, a client can see data moving backwards in time. Monotonic reads consistency prevents this by ensuring each client processes its reads from the same replica. This can be accomplished by routing clients to replicas based on a hash of the client/user ID. if a replica fails, the clients queries would be rerouted to a different replica.
+When reading from multiple asynchronous followers, a client can see data moving backwards in time. Monotonic reads consistency prevents this by ensuring each client processes its reads from the same replica. This can be accomplished by routing clients to replicas based on a hash of the client/user ID. if a replica fails, the clients queries would be rerouted to a different replica.  <br />
+<img src="https://github.com/jguamie/system-design/blob/master/images/replication-4.png" align="middle" width="70%">
 ## Multi-Leader Replication
-In multi-leader replication, clients can send writes to one of several leader nodes, which communicate changes to the other leader nodes and all replica follower nodes. This mode is for expanding beyond a single datacenter. Multi-leader replication does not make sense within a single datacenter due to the added complexity.
+In multi-leader replication, clients can send writes to one of several leader nodes, which communicate changes to the other leader nodes and all replica follower nodes. This mode is for expanding beyond a single datacenter. Multi-leader replication does not make sense within a single datacenter due to the added complexity.  <br />
+<img src="https://github.com/jguamie/system-design/blob/master/images/replication-6.png" align="middle" width="70%">
 ### Conflict Resolution
 With multi-leader replication, write conflicts become a problem. The system must have a means to detect conflicts and resolve them.
 ## Leaderless Replication
@@ -35,10 +40,12 @@ In leaderless replication, clients send each write to multiple nodes. Clients re
 ### Read Repair
 When a client detects discrepencies in reads from multiple nodes, it write the up-to-date data to the replica with the stale data. Version numbers are used to determine which data is newer.
 ### Anti-Entropy Process
-Systems will have a background process that periodically checks for differences between replicas and resolve them accordingly.
+Systems will have a background process that periodically checks for differences between replicas and resolve them accordingly.  <br />
+<img src="https://github.com/jguamie/system-design/blob/master/images/replication-10.png" align="middle" width="70%">
 ### Quorum Consistency
 In quorum consistency, for *N* replicates, every write must be confirmed by at least *W* nodes and every read must be confirmed by at least *R* nodes. To guarantee up-to-date data, we must have `W + R > N`. This ensures that at least one *R* node is up-to-date. *N* should be an odd number (typically 3 or 5).
 
-This mode remains available with node failures as `W < N` and `R < N`. Reads and writes are always sent to all *N* replicas in parallel. The client waits for *W* or *R* nodes to respond before a write or read is considered successful.
+This mode remains available with node failures as `W < N` and `R < N`. Reads and writes are always sent to all *N* replicas in parallel. The client waits for *W* or *R* nodes to respond before a write or read is considered successful.  <br />
+<img src="https://github.com/jguamie/system-design/blob/master/images/replication-11.png" align="middle" width="70%">
 # References
 1. [Chapter 5, Replication - Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321)
