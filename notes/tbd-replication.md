@@ -31,6 +31,14 @@ In multi-leader replication, clients can send writes to one of several leader no
 ### Conflict Resolution
 With multi-leader replication, write conflicts become a problem. The system must have a means to detect conflicts and resolve them.
 ## Leaderless Replication
-In leaderless replication, clients send each write to multiple nodes. Clients read from multiple nodes in parallel and if a discrepancy is detected, it will correct the nodes with stale data. This mode was popularized by Amazon Dynamo--Dynamo inspired Riak and Cassandra, which are Dynamo-style database systems. 
+In leaderless replication, clients send each write to multiple nodes. Clients read from multiple nodes in parallel and if a discrepancy is detected, it will correct the nodes with stale data. This mode was popularized by Amazon Dynamo--Dynamo inspired Riak and Cassandra, which are Dynamo-style database systems.
+### Read Repair
+When a client detects discrepencies in reads from multiple nodes, it write the up-to-date data to the replica with the stale data. Version numbers are used to determine which data is newer.
+### Anti-Entropy Process
+Systems will have a background process that periodically checks for differences between replicas and resolve them accordingly.
+### Quorum Consistency
+In quorum consistency, for *N* replicates, every write must be confirmed by at least *W* nodes and every read must be confirmed by at least *R* nodes. To guarantee up-to-date data, we must have `W + R > N`. This ensures that at least one *R* node is up-to-date. *N* should be an odd number (typically 3 or 5).
+
+This mode remains available with node failures as `W < N` and `R < N`. Reads and writes are always sent to all *N* replicas in parallel. The client waits for *W* or *R* nodes to respond before a write or read is considered successful.
 # References
 1. [Chapter 5, Replication - Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321)
