@@ -25,26 +25,32 @@ Durability is the guarantee that once a transaction has been committed, the data
 Read committed isolation and snapshot isolation are weak (nonserializable) isolation levels. Serializable isolation guarantees that transactions have the same effect as if they were run serially (one at a time, without any concurrency). In practice, serializable isolation incurs a significant performance cost. Many databases choose not to pay this cost. A popular comment is, "Use an ACID database if you're handling financial data!" Even many relational databases that are considered ACID use some form of weak isolation.
 ### Read Committed Isolation
 Read committed isolation is the most basic level of transaction isolation. It guarantees:
-* When writing to a database, only data that has been committed will be overwritten (no dirty writes).
 * When reading from a database, only data that has been committed will be returned (no dirty reads).
-#### Dirty Writes
-Dirty writes are where a transaction overwrites uncommitted data of an in-progress transaction. The database needs to delay the second transaction's write until the first transaction's write completes.
-
-Most databases prevent dirty writes by using row-level locks. When a transaction wants to modify an object (row or document), it must first acquire a lock on that object. The lock is held until the transaction is committed or aborted. Other transactions that want to modify the object must wait until the lock is released.
+* When writing to a database, only data that has been committed will be overwritten (no dirty writes).
 #### Dirty Reads
 Dirty reads are where one transaction reads another transaction's writes before they have been committed. As the data is in a partially-updated state, it will cause other transactions to make incorrect decisions. Also, if a transaction aborts, other transactions may have read data that will now be rolled back.
 
-Most databases prevent dirty reads by remembering both the old committed value and the new value set by the transaction that currently holds the write lock. While a transaction is ongoing, other transactions that read the object are given the old value. Once a new value is committed, transactions switch over to reading the new value.
+Most databases prevent dirty reads by remembering both the old committed value and the new value set by the transaction that currently holds the write lock. While a transaction is ongoing, other transactions that read the object are given the old value. Once a new value is committed, transactions switch over to reading the new value.  <br />
+<img src="https://github.com/jguamie/system-design/blob/master/images/transactions-4.png" align="middle" width="70%">
 
 Read locks are rarely used as it harms the response time for read-only transactions. One long write transaction can force many read-only transactions to wait until the write transaction is completed.
+#### Dirty Writes
+Dirty writes are where a transaction overwrites uncommitted data of an in-progress transaction. The database needs to delay the second transaction's write until the first transaction's write completes.  <br />
+<img src="https://github.com/jguamie/system-design/blob/master/images/transactions-5.png" align="middle" width="70%">
+
+Most databases prevent dirty writes by using row-level locks. When a transaction wants to modify an object (row or document), it must first acquire a lock on that object. The lock is held until the transaction is committed or aborted. Other transactions that want to modify the object must wait until the lock is released.
 #### Read Skew (Nonrepeatable Reads)
-Read skew happens when a transaction is writing to multiple objects and in parallel, a second transaction reads the new data in some objects and old data in other objects. This causes the second transaction to see inconsistencies in the database. Read committed isolation doesn't prevent read skew (nonrepeatable reads). This is solved by snapshot isolation.
+Read skew happens when a transaction is writing to multiple objects and in parallel, a second transaction reads the new data in some objects and old data in other objects. This causes the second transaction to see inconsistencies in the database.  <br />
+<img src="https://github.com/jguamie/system-design/blob/master/images/transactions-6.png" align="middle" width="70%">
+
+Read committed isolation doesn't prevent read skew (nonrepeatable reads). This is solved by snapshot isolation.
 ### Snapshot Isolation
-Snapshot isolation is where a transaction will only read data from a historical database state of when the transaction began. Even if data is changed later by another transaction, each transaction will read old data from its specific    snapshot.
+Snapshot isolation is where a transaction will only read data from a historical database state of when the transaction began. Even if data is changed later by another transaction, each transaction will read old data from its specific snapshot.
 
 Some other databases refer to snapshot isolation with a different name. In Oracle, this is implemented as serializable isolation. In PostgreSQL and MySQL, this is implemented as repeatable read isolation.
 #### Multi-Version Concurrency Control (MVCC)
-Snapshot isolation is usually implemented with multi-version concurrency control (MVCC). The database will keep several different committed versions of an object as various in-progress transactions need to read database state at different points in time. Each transaction is always given a unique, always-incrementing transaction ID. 
+Snapshot isolation is usually implemented with multi-version concurrency control (MVCC). The database will keep several different committed versions of an object as various in-progress transactions need to read database state at different points in time. Each transaction is always given a unique, always-incrementing transaction ID.  <br />
+<img src="https://github.com/jguamie/system-design/blob/master/images/transactions-7.png" align="middle" width="70%">
 ##### Modifications
 Whenever a write occurs, the data is tagged with the writer's transaction ID. Whenever a transaction reads from the database, any writes made by transactions with a later transaction ID are ignored. 
 
@@ -67,7 +73,8 @@ Another solution is to have a transaction manager that detects lost updates. If 
 ##### Conflict Resolution (Replication)
 Replicated databases allow concurrent writes to create several conflicting versions of an object (siblings). These databases use application code or special data structures to resolve and merge these versions afterwards.
 #### Write Skew
-Write skew happens when a transaction reads an object, makes a decision based on the data, and writes its decision to the database. However, by the time the decision is committed, another transaction has changed the initially-read object causing the premise of the decision to be false. Snapshot isolation doesn't prevent write skew. Only serializable isolation prevents write skew.
+Write skew happens when a transaction reads an object, makes a decision based on the data, and writes its decision to the database. However, by the time the decision is committed, another transaction has changed the initially-read object causing the premise of the decision to be false. Snapshot isolation doesn't prevent write skew. Only serializable isolation prevents write skew.  <br />
+<img src="https://github.com/jguamie/system-design/blob/master/images/transactions-8.png" align="middle" width="70%">
 #### Phantoms
 Phantoms happen when a transaction reads objects that match a search query, then another transaction commits a write that adds new objects that match the search query. In this case, locks aren't effective as the objects do not exist yet. Snapshot serialization prevents standard phantom reads but 2PL's index-ranged locks are required to prevent phantoms and write skew.
 ### Serializable Isolation
