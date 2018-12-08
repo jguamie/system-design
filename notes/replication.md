@@ -44,6 +44,6 @@ Systems have a background process that periodically checks for differences betwe
 For *N* replicates, every write must be confirmed by at least *W* nodes while every read must be confirmed by at least *R* nodes. To guarantee up-to-date data, we must have `W + R > N`. This ensures that at least one *R* node is up-to-date. *N* is an odd number (typically 3 or 5).  <br />
 <img src="https://github.com/jguamie/system-design/blob/master/images/replication-11.png" align="middle" width="70%">
 
-This mode remains available with node failures due to the conditions `W < N` and `R < N`. Reads and writes are always sent to all *N* replicas in parallel. The client waits for at least *W*/*R* nodes to respond before a write/read is considered successful.
+This mode remains available with node failures due to the conditions `W < N` and `R < N`. Reads and writes are always sent to all *N* replicas in parallel. The client waits for at least *W* or *R* nodes to respond before a write or read is considered successful.
 # References
 1. [Chapter 5, Replication - Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321)
