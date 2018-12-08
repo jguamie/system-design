@@ -10,6 +10,7 @@
 1. [What happens when you type google.com into your browser?](https://github.com/alex/what-happens-when)
 ## Week 3 (2018 Nov 10)
 1. [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321), Chapter 5: Replication
+	* [Replication - My Notes](https://github.com/jguamie/system-design/blob/master/notes/replication.md)
 1. [Raft Distributed Consensus - My Notes](https://github.com/jguamie/system-design/blob/master/notes/raft-distributed-consensus.md)
 ## Week 4 (2018 Nov 17)
 1. [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321), Chapter 6: Partitioning
