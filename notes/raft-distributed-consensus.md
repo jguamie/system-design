@@ -51,4 +51,4 @@ All change requests go to the *Leader*.
   1. Nodes in the minority partition will roll back uncommitted log entries and match the new *Leader*'s log.
   1. The logs are now consistent across the cluster.
 # References
-1. [Raft: Understandable Distributed Consensus](http://thesecretlivesofdata.com/raft/).
+1. "Raft: Understandable Distributed Consensus." The Secret Lives of Data. Accessed November 04, 2018. http://thesecretlivesofdata.com/raft/.
