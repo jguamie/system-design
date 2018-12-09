@@ -34,4 +34,4 @@ On read, data can be served from a single partition. This makes read queries on 
 
 DynamoDB uses global indexes. Updates to secondary indexes are asynchronous and therefore, eventually consistent.
 # References
-1. [Chapter 6, Partitioning - Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321)
+1. Kleppmann, Martin. “Chapter 6: Partitioning.” In [*Designing Data-Intensive Applications: The Big Ideas behind Reliable, Scalable, and Maintainable Systems*](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321). Sebastopol, CA: O'Reilly Media, 2017.
