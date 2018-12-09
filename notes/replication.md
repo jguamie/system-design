@@ -26,7 +26,7 @@ Read-after-write consistency (or read-your-writes consistency) is a guarantee th
 <img src="https://github.com/jguamie/system-design/blob/master/images/replication-3.png" align="middle" width="70%">
 
 ### Monotonic Reads Consistency
-When reading from multiple asynchronous followers, a client can see data moving backwards in time. Monotonic reads consistency prevents this by ensuring each client processes its reads from the same replica. This can be accomplished by routing clients to replicas using a hash of its client/user ID. If the replica fails, the clients queries are rerouted to a different replica.  <br />
+When reading from multiple asynchronous followers, a client can see data moving backwards in time. Monotonic reads consistency prevents this by ensuring each client processes its reads from the same replica. This can be accomplished by routing clients to replicas using a hash of its client/user ID. If the replica fails, a client's queries are rerouted to a different replica.  <br />
 <img src="https://github.com/jguamie/system-design/blob/master/images/replication-4.png" align="middle" width="70%">
 ## Multi-Leader Replication
 In multi-leader replication, clients can send writes to one of several leader nodes, which communicate changes to the other leader nodes and all replica follower nodes. This mode is for expanding beyond a single datacenter. Multi-leader replication does not make sense within a single datacenter due to the added complexity.  <br />
@@ -40,7 +40,7 @@ With multi-leader replication, write conflicts become a problem--two writes conc
 ## Leaderless Replication
 In leaderless replication, clients send each write to multiple nodes. Clients read from multiple nodes in parallel and if a discrepancy is detected, it will correct the nodes with stale data. This mode was popularized by Amazon Dynamo--Riak and Cassandra are database systems inspired by Dynamo.
 ### Read Repair
-When a client detects discrepencies in reads from multiple nodes, it writes the up-to-date data to the replica with the stale data. Version numbers are used to determine which data is newer.  <br />
+When a client detects discrepancies in reads from multiple nodes, it writes the up-to-date data to the replica with the stale data. Version numbers are used to determine which data is newer.  <br />
 <img src="https://github.com/jguamie/system-design/blob/master/images/replication-10.png" align="middle" width="70%">
 ### Anti-Entropy Process
 Systems have a background process that periodically checks for differences between replicas and resolve them accordingly.
