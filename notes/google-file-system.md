@@ -67,4 +67,4 @@ Latency is minimized by pipelining data transfers over TCP connections. Once a c
 * Checksumming has little effect on read performance. Checksums are only a small amount of extra data for verification.
 * During idle periods, chunkservers verify data blocks of inactive chunks. This solves for detecting corruption in chunks that are rarely used.
 # References
-1. [The Google File System](http://research.google.com/archive/gfs.html)
+1. Ghemawat, Sanjay, Gobioff, Howard, and Leung, Shun-Tak, "[The Google File System](http://research.google.com/archive/gfs.html)," Proceedings of the 19th ACM Symposium on Operating Systems Principles, ACM, Bolton Landing, NY (2003), pp. 20-43
