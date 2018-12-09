@@ -54,4 +54,4 @@ The indexing system needs to regularly process more than 20 terabytes of raw dat
 * Time to implement changes to the indexing code went down. One change that took a few months in the old system only took a few days in the new system.
 * The system became easier to operate as it didn't need to deal with problems associated with machine failures, slow machines, and networking issues.
 # References
-1. [MapReduce: Simplified Data Processing on Large Clusters](http://research.google.com/archive/mapreduce.html)
+1. Dean, Jeffrey and Ghemawat, Sanjay, "[MapReduce: Simplified Data Processing on Large Clusters](http://research.google.com/archive/mapreduce.html), OSDI'04: Sixth Symposium on Operating System Design and Implementation, San Francisco, CA (2004), pp. 137-150
