@@ -50,4 +50,4 @@ For *N* replicates, every write must be confirmed by at least *W* nodes while ev
 
 This mode remains available with node failures due to the conditions `W < N` and `R < N`. Reads and writes are always sent to all *N* replicas in parallel. The client waits for at least *W* or *R* nodes to respond before a write or read is considered successful.
 # References
-1. Kleppmann, Martin. “Chapter 5: Replication.” In [*Designing Data-intensive Applications: The Big Ideas behind Reliable, Scalable, and Maintainable Systems*](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321). Sebastopol, CA: O'Reilly Media, 2017.
+1. Kleppmann, Martin. “Chapter 5: Replication.” In [*Designing Data-Intensive Applications: The Big Ideas behind Reliable, Scalable, and Maintainable Systems*](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321). Sebastopol, CA: O'Reilly Media, 2017.
