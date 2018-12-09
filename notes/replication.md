@@ -32,7 +32,11 @@ When reading from multiple asynchronous followers, a client can see data moving 
 In multi-leader replication, clients can send writes to one of several leader nodes, which communicate changes to the other leader nodes and all replica follower nodes. This mode is for expanding beyond a single datacenter. Multi-leader replication does not make sense within a single datacenter due to the added complexity.  <br />
 <img src="https://github.com/jguamie/system-design/blob/master/images/replication-6.png" align="middle" width="70%">
 ### Conflict Resolution
-With multi-leader replication, write conflicts become a problem. The system needs to detect conflicts and resolve them.
+With multi-leader replication, write conflicts become a problem--two writes concurrently modify the same object. The system needs to detect conflicts and resolve them. The following are different methods for resolving conflicts. These methods resolve conflict at the individual row or document level.
+1. **Conflict Avoidance.** Many systems choose to avoid conflicts all together. This is accomplished by ensuring that all writes for a particular object go through the same leader. In systems where users are primarily editing their own data, each user can be assigned a home datacenter--this is typically the datacenter that is geographically closest to the user. Avoiding conflicts is the most recommended approach.
+1. **Last Write Wins (LWW).** Each write is given a unique ID or timestamp. The write with the highest ID or most recent timestamp wins, throwing away any other writes.
+1. **Merge Writes.** The system can merge the write together e.g., order alphabetically and then concatenate the writes.
+1. **Custom Conflict Resolution Logic.** The system provides users with the means to write their own conflict resolution logic using application code. One approach is for the application to automatically resolve the conflict. Another approach is for the application to prompt the client with options on how to resolve the conflict. 
 ## Leaderless Replication
 In leaderless replication, clients send each write to multiple nodes. Clients read from multiple nodes in parallel and if a discrepancy is detected, it will correct the nodes with stale data. This mode was popularized by Amazon Dynamo--Riak and Cassandra are database systems inspired by Dynamo.
 ### Read Repair
@@ -46,4 +50,4 @@ For *N* replicates, every write must be confirmed by at least *W* nodes while ev
 
 This mode remains available with node failures due to the conditions `W < N` and `R < N`. Reads and writes are always sent to all *N* replicas in parallel. The client waits for at least *W* or *R* nodes to respond before a write or read is considered successful.
 # References
-1. [Chapter 5, Replication - Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321)
+1. Kleppmann, Martin. “Chapter 5: Replication.” In [Designing Data-intensive Applications: The Big Ideas behind Reliable, Scalable, and Maintainable Systems](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321). Sebastopol, CA: O'Reilly Media, 2017.
