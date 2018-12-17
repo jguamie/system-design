@@ -3,6 +3,8 @@ The Chubby Lock Service is a distributed course-grained locking service. Chubby 
 ## Overview
 Chubby's goal is to allow clients to synchronize their activities and agree to basic information about their systems. Chubby uses the Paxos distributed consensus protocol to solve for asynchronous consensus. Each Chubby instance (Chubby cell) are dedicated to a single data center and typically serve about 10,000 machines.
 ## Design
+<img src="https://github.com/jguamie/system-design/blob/master/images/chubby-system.png" align="middle" width="50%">
+
 Chubby wasn't designed to be a library that simply provides Paxos distributed consensus, but instead as a centralized lock service. This made it easier for developers to maintain existing program structure. Minimal effort is required to elect a master and write to an existing file server.
 
 The storage feature is important as services need to advertise Chubby's results with others e.g., after a primary is elected or when data is repartitioned. Not having a separate service for sharing the results reduces the number of servers that clients depend on. Another benefit is that the consistency features of the protocol become shared.
