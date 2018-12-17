@@ -24,6 +24,7 @@ Mandatory locks prevent users from accessing a locked file for debugging or admi
 With distributed systems, receiving messages out of order is a problem that needs to be addressed--Chubby uses sequence numbers to do so. A client can request for a sequencer on files it holds a lock on. A sequencer is a byte-string that contains the name of the lock, the lock mode (exclusive or shared), and the lock generation number. The client passes this sequencer to the respective file servers. The file servers are expected to validate the sequencer and protect the client's operations in the appropriate mode.
 
 For file servers that do not support sequencers, Chubby provides a lock-delay period--typically one minute. The lock-delay protects from regular problems caused by message delays and restarts.
+
 ## Example: Name Service
 Chubby's success as a name service is due to its use of consistent client caching over time-based caching. Developers appreciate not having to manage a cache timeout such as DNS's time-to-live (TTL) value.
 
