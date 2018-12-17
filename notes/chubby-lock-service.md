@@ -9,7 +9,7 @@ Chubby wasn't designed to be a library that only provides Paxos distributed cons
 
 The storage feature is important as services need to advertise Chubby's results with others e.g., after a primary is elected or when data is repartitioned. Not having a separate service for sharing the results reduces the number of servers that clients depend on. Another benefit is that the consistency features of the protocol become shared.
 
-Each Chubby cell typically has 5 replicas. This is to ensure high availability. A service advertising its primary through a Chubby file can have thousands of clients that need to observe this file. 93% of RPCs are KeepAlives between a Chubby client and Chubby cell.
+Each Chubby cell typically has 5 replicas. This is to ensure high availability. A service advertising its primary through a Chubby file can have thousands of clients that need to observe this file. 93% of RPCs are KeepAlives between a Chubby client and a Chubby cell.
 
 Chubby uses event notification to notify clients of any changes to Chubby files. For example, clients and replicas of a service will need to be notified if the master/primary changes. Most common events include file contents modified, child node added/removed/modified, and Chubby master failed over.
 ## Coarse-Grained Locks versus Fine-Grained Locks
