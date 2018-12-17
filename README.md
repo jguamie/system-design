@@ -19,6 +19,7 @@
 1. [The Google File System](https://ai.google/research/pubs/pub51)
 	* [GFS - My Notes](https://github.com/jguamie/system-design/blob/master/notes/google-file-system.md)
 1. [Chubby: A Lock Service for Loosely-Coupled Distributed Systems](https://ai.google/research/pubs/pub27897)
+	* [Chubby - My Notes](https://github.com/jguamie/system-design/blob/master/notes/chubby-lock-service.md)
 ## Week 5 (2018 Nov 24)
 1. [Bigtable: A Distributed Storage System for Structured Data](http://research.google.com/archive/bigtable.html)
 1. [MapReduce: Simplified Data Processing on Large Clusters](http://research.google.com/archive/mapreduce.html)
