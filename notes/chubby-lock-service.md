@@ -5,7 +5,7 @@ Chubby's goal is to allow clients to synchronize their activities and agree to b
 ## Design
 <img src="https://github.com/jguamie/system-design/blob/master/images/chubby-system.png" align="middle" width="50%">
 
-Chubby wasn't designed to be a library that only provides Paxos distributed consensus, but instead as a centralized lock service. This makes it easier for developers to maintain their existing program structures. Minimal effort is required to elect a master and write to an existing file server.
+Chubby wasn't designed to be a library that only provides Paxos distributed consensus, but instead as library that accesses a centralized lock service. This makes it easier for developers to maintain their existing program structures. Minimal effort is required to elect a master and write to an existing file server.
 
 The storage feature is important as services need to advertise Chubby's results with others e.g., after a primary is elected or when data is repartitioned. Not having a separate service for sharing the results reduces the number of servers that clients depend on. Another benefit is that the consistency features of the protocol become shared.
 
