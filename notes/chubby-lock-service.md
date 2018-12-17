@@ -2,6 +2,8 @@
 The Chubby Lock Service is a distributed course-grained locking service. Chubby also provides low-volume storage to be used as a repository for distributed systems' configuration changes. Chubby's most popular use has been as a name service.
 ## Overview
 Chubby's goal is to allow clients to synchronize their activities and agree to basic information about their systems. Chubby uses the Paxos distributed consensus protocol to solve for asynchronous consensus. Each Chubby instance (cell) is dedicated to a single data center and typically serves about 10,000 machines.
+
+These notes do not go into the details of Paxos distributed consensus. Refer to the notes on [Raft Distributed Consensus](https://github.com/jguamie/system-design/blob/master/notes/raft-distributed-consensus.md) (Raft is very similar to Paxos on the surface).
 ## Design
 <img src="https://github.com/jguamie/system-design/blob/master/images/chubby-system.png" align="middle" width="50%">
 
@@ -32,8 +34,8 @@ The client passes this sequencer to the appropriate file servers. The file serve
 
 For file servers that do not support sequencers, Chubby provides a lock-delay period--typically one minute. The lock-delay protects from regular problems caused by message delays and restarts.
 
-## Example: Name Service
-Chubby's success as a name service is due to its use of consistent client caching over time-based caching. Developers appreciate not having to manage a cache timeout such as DNS's time-to-live (TTL) value.
+## Example: Chubby Name Service
+Chubby's success as a name service is due to its use of consistent client caching (distributed consensus) over time-based caching. Developers appreciate not having to manage a cache timeout such as DNS's time-to-live (TTL) value.
 
 Caching within the standard internet naming system, DNS, is based on time. Each DNS entry has a TTL.
 * Long TTL values lead to long client fail-over times.
