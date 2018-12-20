@@ -34,7 +34,7 @@ The client passes this sequencer to the appropriate file servers. The file serve
 
 For file servers that do not support sequencers, Chubby provides a lock-delay period--typically one minute. The lock-delay protects from regular problems caused by message delays and restarts.
 ## Caching
-To reduce read traffic to the Chubby cell, Chubby clients cache metadata and file data in a write-through cache in the client's memory. The following occurs to keep cache consistent:
+To reduce read traffic to the Chubby cell, Chubby clients cache metadata and file data in a write-through cache on the client's memory. The following occurs to keep cache consistent:
 1. The master maintains a list of each client's cache contents.
 1. When metadata or file data is to be changed, the master blocks the modification.
 1. The master sends invalidations on top of the KeepAlive RPCs to every client that has cached this data. 
