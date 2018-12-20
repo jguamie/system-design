@@ -40,6 +40,7 @@ To reduce read traffic to the Chubby cell, Chubby clients cache metadata and fil
 1. The master sends invalidations on top of the KeepAlive RPCs to every client that has cached this data. 
 1. When a client receives the invalidation, it flushes the invalidated data from cache and acknowledges the change to the master in its next KeepAlive call.
 1. Once all clients acknowledge the invalidation, the master proceeds with the modification.
+
 In Chubby, caching is important as read requests greatly outnumber write requests. Also, invalidation protocols are more efficient than update protocols. Update protocols require clients that have accessed a file once to receive updates for that file indefinitely--this is unnecessary.
 ## Example: Chubby Name Service
 Chubby's success as a name service is due to its use of consistent client caching (distributed consensus) over time-based caching. Developers appreciate not having to manage a cache timeout such as DNS's time-to-live (TTL) value.
