@@ -11,7 +11,7 @@ Chubby wasn't designed to be a library that only provides Paxos distributed cons
 
 The storage feature is important as services need to advertise Chubby's results with others e.g., after a primary is elected or when data is repartitioned. Not having a separate service for sharing the results reduces the number of servers that clients depend on. Another benefit is that the consistency features of the protocol become shared.
 
-Each Chubby cell typically has 5 replicas. This is to ensure high availability. A service advertising its primary through a Chubby file can have thousands of clients that need to observe this file. 93% of RPCs are KeepAlives between a Chubby client and a Chubby cell.
+Each Chubby cell typically has 5 replicas. At the same time, read requests are handled by the master only. A service advertising its primary through a Chubby file can have thousands of clients that need to observe this file. 93% of RPCs are KeepAlives between a Chubby client and a Chubby cell.
 
 Chubby uses event notification to notify clients of any changes to Chubby files. For example, clients and replicas of a service will need to be notified if the master/primary changes. Most common events include file contents modified, child node added/removed/modified, and Chubby master failed over.
 ## Coarse-Grained Locks versus Fine-Grained Locks
@@ -33,7 +33,14 @@ With distributed systems, receiving messages out of order is a problem that need
 The client passes this sequencer to the appropriate file servers. The file servers are expected to validate the sequencer and protect the client's operations in the given lock mode.
 
 For file servers that do not support sequencers, Chubby provides a lock-delay period--typically one minute. The lock-delay protects from regular problems caused by message delays and restarts.
-
+## Caching
+To reduce read traffic to the Chubby cell, Chubby clients cache metadata and file data in a write-through cache in the client's memory. The following occurs to keep cache consistent:
+1. The master maintains a list of each client's cache contents.
+1. When metadata or file data is to be changed, the master blocks the modification.
+1. The master sends invalidations on top of the KeepAlive RPCs to every client that has cached this data. 
+1. When a client receives the invalidation, it flushes the invalidated data from cache and acknowledges the change to the master in its next KeepAlive call.
+1. Once all clients acknowledge the invalidation, the master proceeds with the modification.
+In Chubby, caching is important as read requests greatly outnumber write requests. Also, invalidation protocols are more efficient than update protocols. Update protocols require clients that have accessed a file once to receive updates for that file indefinitely--this is unnecessary.
 ## Example: Chubby Name Service
 Chubby's success as a name service is due to its use of consistent client caching (distributed consensus) over time-based caching. Developers appreciate not having to manage a cache timeout such as DNS's time-to-live (TTL) value.
 
