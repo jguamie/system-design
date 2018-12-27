@@ -3,8 +3,10 @@ As systems scale, a single machine is no longer feasible to process large datase
 
 Typically, the database will assign multiple partitions to a node. This improves dynamic load balancing across nodes. If a leader-follower replication model is used, each partition's leader is assigned to one node and its followers are assigned to other nodes. Each node could be a leader to some partitions and a follower to other partitions.  <br />
 <img src="https://github.com/jguamie/system-design/blob/master/images/partitioning-1.png" align="middle" width="70%">
+### Federation
+Federation (functional partitioning) is where the data model is split up by function. For example, a monolithic data model can be split up to forums, users, and products. Federation alone is not effective if the data model has very large functions or tables. Also, joining data between two functions becomes complex. Once the data is federated appropriately, the following partitioning methods can be applied.
 ## Key-Value Data Model
-With key-value stores, there are two main approaches to partitioning: key range partitioning and hash partitioning.
+With key-value stores, there are two main approaches to partitioning: key range partitioning, and hash partitioning.
 ### Key Range Partitioning
 Key range partitioning is where keys are sorted and partitioned by a range of keys. This allows for efficient key range queries.  <br />
 <img src="https://github.com/jguamie/system-design/blob/master/images/partitioning-2.png" align="middle" width="70%">
