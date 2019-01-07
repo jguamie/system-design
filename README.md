@@ -45,3 +45,4 @@
 1. [Spanner: Becoming a SQL System](https://ai.google/research/pubs/pub46103)
 1. [Borg: Large-Scale Cluster Management](https://ai.google/research/pubs/pub43438)
 1. [Borg, Omega, and Kubernetes](https://ai.google/research/pubs/pub44843)
+1. [Google: the Anatomy of a Large-Scale Hypertextual Web Search Engine](http://infolab.stanford.edu/~backrub/google.html)
