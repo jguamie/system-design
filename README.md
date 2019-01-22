@@ -32,17 +32,14 @@
 	* [Google - My Notes](https://github.com/jguamie/system-design/blob/master/notes/google-search-engine.md)
 # Resources
 1. [Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems - Martin Kleppmann](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321) Chapters 1-3, 5-9 only
-1. [System Design - Tushar Roy Videos](https://www.youtube.com/watch?v=UzLMhqg3_Wc&list=PLrmLmBdmIlps7GJJWW9I7N0P0rB0C3eY2)
-1. [Grokking the System Design Interview - educative.io Course](https://www.educative.io/collection/5668639101419520/5649050225344512)
 1. [The System Design Primer - Donne Martin](https://github.com/donnemartin/system-design-primer)
+1. [Grokking the System Design Interview - educative.io Course](https://www.educative.io/collection/5668639101419520/5649050225344512)
+1. [System Design Interview Questions - InterviewBit](https://www.interviewbit.com/courses/system-design/)
+1. [System Design - Tushar Roy Videos](https://www.youtube.com/watch?v=UzLMhqg3_Wc&list=PLrmLmBdmIlps7GJJWW9I7N0P0rB0C3eY2)
 ## Google Publications
 1. [The Google File System](http://research.google.com/archive/gfs.html)
 1. [Chubby: A Lock Service for Loosely-Coupled Distributed Systems](https://ai.google/research/pubs/pub27897)
 1. [Bigtable: A Distributed Storage System for Structured Data](http://research.google.com/archive/bigtable.html)
 1. [MapReduce: Simplified Data Processing on Large Clusters](http://research.google.com/archive/mapreduce.html)
-1. [Spanner: Google's Globally-Distributed Database](https://ai.google/research/pubs/pub39966)
-1. [Spanner: Becoming a SQL System](https://ai.google/research/pubs/pub46103)
-1. [Borg: Large-Scale Cluster Management](https://ai.google/research/pubs/pub43438)
-1. [Borg, Omega, and Kubernetes](https://ai.google/research/pubs/pub44843)
 1. [Google: the Anatomy of a Large-Scale Hypertextual Web Search Engine](http://infolab.stanford.edu/~backrub/google.html)
 1. [Google Protocol Buffers](https://developers.google.com/protocol-buffers/)
