@@ -52,3 +52,8 @@ Availability % | Downtime per Year
 99.9% ("three nines")	| 9 hours
 99.99% ("four nines")	| 50 minutes
 99.999% ("five nines") | 5 minutes
+# Requests per Second
+* 1,000 RPS is not difficult to achieve on a normal server for a regular service.
+* 2,000 RPS is a decent amount of load for a normal server for a regular service.
+# References
+* [Requests per second. A server load reference](https://wrongsideofmemphis.com/2013/10/21/requests-per-second-a-reference/)
