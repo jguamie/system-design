@@ -36,6 +36,7 @@
 1. [Grokking the System Design Interview - educative.io Course](https://www.educative.io/collection/5668639101419520/5649050225344512)
 1. [System Design Interview Questions - InterviewBit](https://www.interviewbit.com/courses/system-design/)
 1. [System Design - Tushar Roy Videos](https://www.youtube.com/watch?v=UzLMhqg3_Wc&list=PLrmLmBdmIlps7GJJWW9I7N0P0rB0C3eY2)
+1. [Technical Mock Interview](https://www.techmockinterview.com/)
 ## Google Publications
 1. [The Google File System](http://research.google.com/archive/gfs.html)
 1. [Chubby: A Lock Service for Loosely-Coupled Distributed Systems](https://ai.google/research/pubs/pub27897)
