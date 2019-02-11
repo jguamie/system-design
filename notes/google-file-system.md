@@ -18,7 +18,7 @@ Each GFS cluster has a single master and multiple chunk servers (3 replicas at d
 * Clients initially interact with the master for metadata. After that, clients communicate directly with the chunkservers
 * Clients only cache metadata. Clients stream huge files or have working sets too large to be cached.
 ### Chunk Size
-* Files are divided into fixed-size 64 GB chunks. Each chunk is identified by a globally-unique 64 bit chunk handle.
+* Files are divided into fixed-size 64 MB chunks. Each chunk is identified by a globally-unique 64 bit chunk handle.
 * Large chunk sizes reduce client interactions with the master. Reads and writes on the same chunk only require one initial request to the master for chunk location info.
 ### Metadata
 * The metadata consists of file and chunk namespaces, access control information, file-to-chunk mappings, and chunk locations (on all replicas).
