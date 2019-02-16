@@ -1,5 +1,5 @@
 # The Chubby Lock Service
-The Chubby Lock Service is a distributed course-grained locking service. A lock service is a form of consensus service that converts the problem of reaching consensus to handing out locks. Basically, a distributed set of processes compete to acquire a lock. The process with the lock has the baton to act on a target resource. 
+The Chubby Lock Service is a distributed course-grained locking service. A lock service is a form of consensus service that converts the problem of reaching consensus to handing out locks. Basically, a distributed set of processes compete to acquire a lock. The process with the lock has the baton to act on a target resource. Apache ZooKeeper is the open-source alternative to Chubby.
 
 Chubby also provides low-volume storage to be used as a repository for distributed systems' configuration changes. Chubby's most popular use has been as a name service.
 ## Overview
