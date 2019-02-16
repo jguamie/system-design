@@ -1,7 +1,12 @@
 # The Chubby Lock Service
 The Chubby Lock Service is a distributed course-grained locking service. Chubby also provides low-volume storage to be used as a repository for distributed systems' configuration changes. Chubby's most popular use has been as a name service.
 ## Overview
-Chubby's goal is to allow clients to synchronize their activities and agree to basic information about their systems. Chubby uses the Paxos distributed consensus protocol to solve for asynchronous consensus. Each Chubby instance (cell) is dedicated to a single data center and typically serves about 10,000 machines.
+Chubby's goal is to allow clients to synchronize their activities and agree to basic information about their systems. Clients need to ensure that only one process across their entire system will act on a resource. Examples include:
+* Ensure only one server can write to a database or write to a file.
+* Ensure only one server can perform a particular action.
+* Ensure there is a single master that processes all writes.
+
+Chubby uses the Paxos distributed consensus protocol to solve for asynchronous consensus. Each Chubby instance (cell) is dedicated to a single data center and typically serves about 10,000 machines.
 
 These notes do not go into the details of Paxos distributed consensus. To learn about Paxos, read [Paxos Made Simple](https://lamport.azurewebsites.net/pubs/paxos-simple.pdf) by Leslie Lamport. Also, Raft is very similar to Paxos. Refer to the notes on [Raft Distributed Consensus](https://github.com/jguamie/system-design/blob/master/notes/raft-distributed-consensus.md).
 ## Design
