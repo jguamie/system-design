@@ -39,6 +39,8 @@ With distributed systems, receiving messages out of order is a problem that need
 
 The client passes this sequencer to the appropriate file servers. The file servers are expected to validate the sequencer and protect the client's operations in the given lock mode.
 
+<img src="https://github.com/jguamie/system-design/blob/master/images/chubby-sequencer.png" align="middle" width="75%">
+
 For file servers that do not support sequencers, Chubby provides a lock-delay period--typically one minute. The lock-delay protects from regular problems caused by message delays and restarts.
 ## Caching
 To reduce read traffic to the Chubby cell, Chubby clients cache metadata and file data in a write-through cache on the client's memory. The following occurs to keep cache consistent:
