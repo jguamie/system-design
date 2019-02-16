@@ -51,6 +51,12 @@ To reduce read traffic to the Chubby cell, Chubby clients cache metadata and fil
 1. Once all clients acknowledge the invalidation, the master proceeds with the modification.
 
 In Chubby, caching is important as read requests greatly outnumber write requests. Also, invalidation protocols are more efficient than update protocols. Update protocols require clients that have accessed a file once to receive updates for that file indefinitely--this is unnecessary.
+## Failover
+When a Chubby master fails, it loses its in-memory state on sessions and locks. When a new master is elected, the following occurs:
+1. The master builds in-memory data structures for sessions and locks that are recorded in the database.
+1. Clients resume KeepAlives to the master, but no other operations.
+1. The master sends a failover event for each client to flush their caches.
+1. Once a client acknowledges the failover event, the master allows all operations from that client to proceed.
 ## Example: Chubby Name Service
 Chubby's success as a name service is due to its use of consistent client caching (distributed consensus) over time-based caching. Developers appreciate not having to manage a cache timeout such as DNS's time-to-live (TTL) value.
 
