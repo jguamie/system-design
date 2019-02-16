@@ -1,5 +1,7 @@
 # The Chubby Lock Service
-The Chubby Lock Service is a distributed course-grained locking service. A lock service is a form of consensus service that converts the problem of reaching consensus to handing out locks. Basically, a distributed set of processes compete to acquire a lock. The process with the lock has the baton to act on a target resource. Chubby also provides low-volume storage to be used as a repository for distributed systems' configuration changes. Chubby's most popular use has been as a name service.
+The Chubby Lock Service is a distributed course-grained locking service. A lock service is a form of consensus service that converts the problem of reaching consensus to handing out locks. Basically, a distributed set of processes compete to acquire a lock. The process with the lock has the baton to act on a target resource. 
+
+Chubby also provides low-volume storage to be used as a repository for distributed systems' configuration changes. Chubby's most popular use has been as a name service.
 ## Overview
 Chubby's goal is to allow clients to synchronize their activities and agree to basic information about their systems. Clients need to ensure that only one process across their entire system will act on a resource. Examples include:
 * Ensure only one server can write to a database or write to a file.
