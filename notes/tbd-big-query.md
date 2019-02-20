@@ -1,4 +1,5 @@
 # BigQuery
+## This is still Work in Progress
 BigQuery is a fully-managed query service for Big Data. It provides an external implementation for Dremel, a query service for analyzing read-only Big Data in seconds. Dremel is able to scan 35 billion rows in tens of seconds, without an index.
 # Design
 ## Columnar Storage
