@@ -56,5 +56,5 @@ Availability % | Downtime per Year
 ## Requests per Second
 * 1,000 RPS is not difficult to achieve on a normal server for a regular service.
 * 2,000 RPS is a decent amount of load for a normal server for a regular service.
-## References
+# References
 * [Requests per second. A server load reference](https://wrongsideofmemphis.com/2013/10/21/requests-per-second-a-reference/)
