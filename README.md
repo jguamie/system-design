@@ -32,7 +32,8 @@
 # Resources
 1. [Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems - Martin Kleppmann](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321) Chapters 1-3, 5-9 only
 1. [The System Design Primer - Donne Martin](https://github.com/donnemartin/system-design-primer)
-* [Technical Mock Interview](https://www.techmockinterview.com/)
+1. [Grokking the System Design Interview - educative.io](https://www.educative.io/collection/5668639101419520/5649050225344512)
+1. [Technical Mock Interview](https://www.techmockinterview.com/)
 # TODO
 1. [Dynamo: Amazon’s Highly Available Key-value Store](https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf)
 1. [Spanner: Google's Globally-Distributed Database](https://ai.google/research/pubs/pub39966)
