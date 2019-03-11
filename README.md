@@ -12,6 +12,7 @@
 1. [Raft Distributed Consensus - My Notes](https://github.com/jguamie/system-design/blob/master/notes/raft-distributed-consensus.md)
 1. [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321), Chapter 6: Partitioning
 	* [Partitioning - My Notes](https://github.com/jguamie/system-design/blob/master/notes/partitioning.md)
+1. [Consistent Hashing - Wikipedia](https://en.wikipedia.org/wiki/Consistent_hashing)
 1. [Rendezvous Hashing - Wikipedia](https://en.wikipedia.org/wiki/Rendezvous_hashing)
 1. [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321), Chapter 7: Transactions
 	* [Transactions - My Notes](https://github.com/jguamie/system-design/blob/master/notes/transactions.md)
@@ -24,9 +25,14 @@
 1. [Bigtable: A Distributed Storage System for Structured Data](http://research.google.com/archive/bigtable.html)
 1. [Google: the Anatomy of a Large-Scale Hypertextual Web Search Engine](http://infolab.stanford.edu/~backrub/google.html)
 	* [Google - My Notes](https://github.com/jguamie/system-design/blob/master/notes/google-search-engine.md)
+## Mock Interviews
+* Practice with at least 5 system design mock interviews.
+* [Technical Mock Interview](https://www.techmockinterview.com/)
+  * This is a paid service with high quality interviewers with detailed feedback.
 # Resources
 1. [Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems - Martin Kleppmann](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321) Chapters 1-3, 5-9 only
 1. [The System Design Primer - Donne Martin](https://github.com/donnemartin/system-design-primer)
+* [Technical Mock Interview](https://www.techmockinterview.com/)
 # TODO
 1. [Dynamo: Amazon’s Highly Available Key-value Store](https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf)
 1. [Spanner: Google's Globally-Distributed Database](https://ai.google/research/pubs/pub39966)
