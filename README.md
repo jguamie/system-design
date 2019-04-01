@@ -23,6 +23,7 @@
 1. [MapReduce: Simplified Data Processing on Large Clusters](http://research.google.com/archive/mapreduce.html)
 	* [MapReduce - My Notes](https://github.com/jguamie/system-design/blob/master/notes/map-reduce.md)
 1. [Bigtable: A Distributed Storage System for Structured Data](http://research.google.com/archive/bigtable.html)
+	* [Bigtable - My Notes](https://github.com/jguamie/system-design/blob/master/notes/bigtable.md)
 1. [Google: the Anatomy of a Large-Scale Hypertextual Web Search Engine](http://infolab.stanford.edu/~backrub/google.html)
 	* [Google - My Notes](https://github.com/jguamie/system-design/blob/master/notes/google-search-engine.md)
 ## Mock Interviews
