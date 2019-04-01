@@ -4,7 +4,7 @@ Bigtable is a distributed storage system for managing structured data.
 Bigtable is indexed by row key, column key, and timestamp. Row keys and column keys are arbitrary strings. Timestamps are 64-bit integers in microseconds. 
 `(row:string, column:string, time:int64) -> string`
 ### Row Keys
-Row keys are typically 10-100 bytes. The max size is 64 kilobytes. Bigtable stores data by the row key in lexicographic order. Each table is dynamically partitioned by a range of rows. These partitions of row ranges are called tablets. In Bigtable, this partitioning approach allows for efficient reads to row ranges.
+Row keys are typically 10-100 bytes. The max size is 64 KB. Bigtable stores data by the row key in lexicographic order. Each table is dynamically partitioned by a range of rows. These partitions of row ranges are called tablets. In Bigtable, this partitioning approach allows for efficient reads to row ranges.
 ### Column Keys
 Column keys are grouped into sets of column families. As column keys within a column family have minimal variability, it allows for optimal data compression within a column family.
 ### Timestamps
@@ -31,11 +31,11 @@ Clients communicate directly with tablet servers through the client library for 
 Bigtable uses a three-level hierarchy to store tablet location information. This hierarchy can store up to 2<sup>34</sup>tablets.
 <img src="https://github.com/jguamie/system-design/blob/master/images/bigtable-tablet-location.png" align="middle" width="60%">
 
-1. The first level is the Root tablet. The Root tablet location is stored in a Chubby file. The Root tablet contains mappings of all the User tablets to their respective METADATA tablet. The Root tablet is never split to maintain the three-level hierarchy.
+1. The first level is the Root tablet. The Root tablet location is stored in a Chubby file. The Root tablet contains mappings of all the User tablets to their respective METADATA tablet. The Root tablet is never split to maintain a three-level hierarchy.
 2. The second level consists of the METADATA tablets. Each METADATA tablet contains the location of a set of User tablets. Each User tablet location is stored under a row key and contains the tablet's table identifier and its end row. The metadata contains the list of SSTables that make up a tablet. Each METADATA row stores about 1 KB in memory. Each METADATA tablet has a max size of 128 MB. 
 3. The third level consists of all the User tablets. To locate tablets, clients require three network round-trips, including one read from Chubby. The client library caches tablet locations.
 ### Tablet Assignment
-The master will detect when a tablet server is no longer serving its tablets. Upon detection, the master will reassign those tablets immediately.
+The master will detect when a tablet server is no longer serving its tablets. Upon detection, the master will reassign those tablets to new tablet servers immediately.
 
 When a new master starts up, it executes the following steps:
 1. The master acquires a unique master lock from Chubby to ensure a single active master.
