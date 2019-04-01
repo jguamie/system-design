@@ -57,7 +57,7 @@ In an experiment with web page content, the two-pass compression scheme achieved
 ## Caching
 Tablet servers use two levels of caching to improve read performance.
 * The Scan Cache is a high-level cache that caches key-value pairs returned by an SSTable.
-* The Block Cache is a low-level cache that caches blocks of SSTables read from GFS.
+* The Block Cache is a low-level cache that caches SSTables blocks read from GFS.
 
 The Scan Cache is useful for applications that read the same data repeatedly. The Block Cache is useful for applications that read data close to recently-read data e.g., sequential reads or random reads in the same locality group.
 ## Bloom Filters
