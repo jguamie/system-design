@@ -1,11 +1,11 @@
 # System Design Notes
 ## Recommended Order of Reading
 1. [Building Software Systems At Google and Lessons Learned - Jeff Dean Video](https://youtu.be/modXC5IWTJI)
+1. [What happens when you type google.com into your browser?](https://github.com/alex/what-happens-when)
 1. [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321), Chapters 1-2: Reliable, Scalable, and Maintainable Applications; Data Models and Query Languages
 	* [Twitter - My Notes](https://github.com/jguamie/system-design/blob/master/notes/twitter.md)
 1. [System Design Math - My Notes](https://github.com/jguamie/system-design/blob/master/notes/math.md)
 1. [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321), Chapter 3: Storage and Retrieval
-1. [What happens when you type google.com into your browser?](https://github.com/alex/what-happens-when)
 1. [Caching - My Notes](https://github.com/jguamie/system-design/blob/master/notes/caching.md)
 1. [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321), Chapter 4: Encoding and Evolution
 1. [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321), Chapter 5: Replication
@@ -27,9 +27,9 @@
 	* [MapReduce - My Notes](https://github.com/jguamie/system-design/blob/master/notes/map-reduce.md)
 1. [Bigtable: A Distributed Storage System for Structured Data](http://research.google.com/archive/bigtable.html)
 	* [Bigtable - My Notes](https://github.com/jguamie/system-design/blob/master/notes/bigtable.md)
+1. [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321), Chapter 11: Stream Processing
 1. [Google: the Anatomy of a Large-Scale Hypertextual Web Search Engine](http://infolab.stanford.edu/~backrub/google.html)
 	* [Google - My Notes](https://github.com/jguamie/system-design/blob/master/notes/google-search-engine.md)
-1. [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321), Chapter 11: Stream Processing
 ## Mock Interviews
 * Practice with at least 5 system design mock interviews.
 * [Technical Mock Interview](https://www.techmockinterview.com/)
