@@ -37,6 +37,7 @@
 # Resources
 * [Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems - Martin Kleppmann](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321) Chapters 1-7, 10-11
 * [The System Design Primer - Donne Martin](https://github.com/donnemartin/system-design-primer)
+	* Read through all the [additional system design interview questions and real world architectures](https://github.com/donnemartin/system-design-primer#additional-system-design-interview-questions).
 * [Grokking the System Design Interview - educative.io](https://www.educative.io/collection/5668639101419520/5649050225344512)
 * [Technical Mock Interview](https://www.techmockinterview.com/)
 # TODO
