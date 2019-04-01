@@ -9,7 +9,8 @@
 1. [Caching - My Notes](https://github.com/jguamie/system-design/blob/master/notes/caching.md)
 1. [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321), Chapter 5: Replication
 	* [Replication - My Notes](https://github.com/jguamie/system-design/blob/master/notes/replication.md)
-1. [Raft Distributed Consensus - My Notes](https://github.com/jguamie/system-design/blob/master/notes/raft-distributed-consensus.md)
+1. [Raft: Understandable Distributed Consensus](http://thesecretlivesofdata.com/raft/) 
+	* [Raft Distributed Consensus - My Notes](https://github.com/jguamie/system-design/blob/master/notes/raft-distributed-consensus.md)
 1. [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321), Chapter 6: Partitioning
 	* [Partitioning - My Notes](https://github.com/jguamie/system-design/blob/master/notes/partitioning.md)
 1. [Consistent Hashing - Wikipedia](https://en.wikipedia.org/wiki/Consistent_hashing)
