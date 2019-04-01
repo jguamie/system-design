@@ -12,4 +12,4 @@ Bigtable allows for multiple versions of the same data. These versions are index
 ## This is still Work in Progress
 
 # Reference
-1. Chang, Fay, Dean, Jeffrey, Ghemawat, Sanjay, Hsieh, Wilson, Wallach, Deborah, Burrows, Mike, Chandra, Tushar, Fikes, Andrew, and Gruber, Robert, "(Bigtable: A Distributed Storage System for Structured Data)[https://ai.google/research/pubs/pub27898]," 7th USENIX Symposium on Operating Systems Design and Implementation (OSDI), {USENIX} (2006), pp. 205-218
+1. Chang, Fay, Dean, Jeffrey, Ghemawat, Sanjay, Hsieh, Wilson, Wallach, Deborah, Burrows, Mike, Chandra, Tushar, Fikes, Andrew, and Gruber, Robert, "[Bigtable: A Distributed Storage System for Structured Data](https://ai.google/research/pubs/pub27898)," 7th USENIX Symposium on Operating Systems Design and Implementation (OSDI), {USENIX} (2006), pp. 205-218
