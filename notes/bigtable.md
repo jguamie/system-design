@@ -41,7 +41,7 @@ When a new master starts up, it executes the following steps:
 1. The master acquires a unique master lock from Chubby to ensure a single active master.
 1. The master scans the servers directory in Chubby to find the live tablet servers.
 1. The master requests each tablet server to report on which tablets are assigned to it.
-1. The master scans the METADATA tablets to learn of the sets of tablets. When the master encounters tablets that are not assigned to a live tablet server, the master will assign it accordingly.
+1. The master scans the METADATA tablets to learn of its sets of tablets. When the master encounters tablets that are not assigned to a live tablet server, the master will assign it accordingly.
 ## Transactions
 Bigtable will only support single-row [transactions](https://github.com/jguamie/system-design/blob/master/notes/transactions.md). Bigtable does not support general transactions across a range of row keys.
 ## Locality Groups
