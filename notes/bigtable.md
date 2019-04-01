@@ -21,14 +21,6 @@ Bigtable depends on Borg, Google's cluster management system, for scheduling job
 Bigtable has three major components: a client library, one master server, and many tablet servers.
 ### Master
 The Bigtable master is primarily responsible for assigning tablets to tablet servers and balancing tablet server load. It manages garbage collection of GFS files. It handles any schema changes e.g., table and column family updates.
-
-The master will detect when a tablet server is no longer serving its tablets. In this case, it will reassign those tablets immediately.
-
-When a new master starts up, it executes the following steps:
-1. The master acquires a unique master lock from Chubby to ensure a single active master.
-1. The master scans the servers directory in Chubby to find the live tablet servers.
-1. The master requests each tablet server to report on which tablets are assigned to it.
-1. The master scans the METADATA tablets to learn of the sets of tablets. When the master encounters tablets that are not assigned to a live tablet server, the master will assign it accordingly.
 ### Tablet Servers
 Each tablet server will manage between 10 to 1,000 tablets. The tablet server handles all read and write requests to these tablets. The tablet server will also split tablets when it has become too large. Each tablet is about 100 to 200 MB in size. Each tablet is assigned to one tablet server at a time.
 ### Clients
@@ -40,6 +32,14 @@ Bigtable uses a three-level hierarchy to store tablet location information. This
 1. The first level is the Root tablet. The Root tablet location is stored in a Chubby file. The Root tablet contains mappings of all the User tablets to their respective METADATA tablet. The Root tablet is never split to maintain the three-level hierarchy.
 2. The second level consists of the METADATA tablets. Each METADATA tablet contains the location of a set of User tablets. Each User tablet location is stored under a row key and contains the tablet's table identifier and its end row. The metadata contains the list of SSTables that make up a tablet. Each METADATA row stores about 1 KB in memory. Each METADATA tablet has a max size of 128 MB. 
 3. The third level consists of all the User tablets. To locate tablets, clients require three network round-trips, including one read from Chubby. The client library caches tablet locations.
+### Tablet Assignment
+The master will detect when a tablet server is no longer serving its tablets. Upon detection, the master will reassign those tablets immediately.
+
+When a new master starts up, it executes the following steps:
+1. The master acquires a unique master lock from Chubby to ensure a single active master.
+1. The master scans the servers directory in Chubby to find the live tablet servers.
+1. The master requests each tablet server to report on which tablets are assigned to it.
+1. The master scans the METADATA tablets to learn of the sets of tablets. When the master encounters tablets that are not assigned to a live tablet server, the master will assign it accordingly.
 ## Transactions
 Bigtable will only support single-row [transactions](https://github.com/jguamie/system-design/blob/master/notes/transactions.md). Bigtable does not support general transactions across a range of row keys.
 ## Applications
