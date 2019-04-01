@@ -53,19 +53,19 @@ Bigtable allows for compression schemes for locality groups. In most cases, clie
 
 Both compressions are very fast. They encode at 100-200 MB/s and decode at 400-1,000 MB/s.
 
-In an experiment with web page content, the two-pass compression scheme achieved a 10-to-1 reduction in space. Gzip compression achieved a 4-to-1 reduction in space.
+In an experiment with web page content, the two-pass compression scheme achieved a 10-to-1 reduction in space. In comparison, Gzip compression achieved a 4-to-1 reduction.
 ## Caching
 Tablet servers use two levels of caching to improve read performance.
-* The Scan Cache is a high-level cache that caches key-value pairs returned by an SSTable.
-* The Block Cache is a low-level cache that caches SSTables blocks read from GFS.
+* The Scan Cache is a high-level cache that stores key-value pairs returned by an SSTable.
+* The Block Cache is a low-level cache that stores SSTables blocks read from GFS.
 
 The Scan Cache is useful for applications that read the same data repeatedly. The Block Cache is useful for applications that read data close to recently-read data e.g., sequential reads or random reads in the same locality group.
 ## Bloom Filters
 Bigtable utilizes bloom filters to reduce the number of disk seeks for read operations. Bloom filters store if an SSTable does not contain data for a row/column pair; therefore, bloom filters prevent disk lookups for non-existent rows or columns.
 ## Examples
 * **Google Analytics.** The raw clicks table contains data for each end-user session. The row name is a tuple containing the website's name and the time the session was created. The raw clicks table is compressed to 14% of its original size. The summary table contains predefined summaries for each website. The summary table is compressed to 29% of its original size.
-* **Google Earth.** This imagery table is used to store raw imagery. The imagery table is the input source into a MapReduce job. The output target is a table to serve client data.
-* **Personalized Search.** The user actions table contains data for all user actions. Each type of action has a separate column family. The user actions table is the input source into a MapReduce job. The output target is a user profiles table. These user profiles are used to personalize live search results. Many other groups have added their own columns for use in other Google services.
+* **Google Earth.** The imagery table is used to store raw imagery. The imagery table is the input source into a MapReduce job. The output target is a table to serve client data.
+* **Personalized Search.** The user actions table contains data for all user actions. Each type of action has a separate column family. The user actions table is the input source into a MapReduce job. The output target is a user profiles table. These user profiles are used to personalize live search results. Many other groups have added their own columns to the user profiles table for use in other Google services.
 # Reference
 1. Chang, Fay, Dean, Jeffrey, Ghemawat, Sanjay, Hsieh, Wilson, Wallach, Deborah, Burrows, Mike, Chandra, Tushar, Fikes, Andrew, and Gruber, Robert, "[Bigtable: A Distributed Storage System for Structured Data](https://ai.google/research/pubs/pub27898)," 7th USENIX Symposium on Operating Systems Design and Implementation (OSDI), {USENIX} (2006), pp. 205-218
 1. Kleppmann, Martin. “Chapter 3: Storage and Retrieval.” [*Designing Data-Intensive Applications: The Big Ideas behind Reliable, Scalable, and Maintainable Systems*](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321). Sebastopol, CA: O'Reilly Media, 2017.
