@@ -31,15 +31,15 @@
 1. [Google: the Anatomy of a Large-Scale Hypertextual Web Search Engine](http://infolab.stanford.edu/~backrub/google.html)
 	* [Google - My Notes](https://github.com/jguamie/system-design/blob/master/notes/google-search-engine.md)
 ## Mock Interviews
-* Practice with at least 5 system design mock interviews.
-* [Technical Mock Interview](https://www.techmockinterview.com/)
-  * This is a paid service with high quality interviewers with detailed feedback.
+* Practice with at least 5 system design mock interviews using [TechMockInterview](https://www.techmockinterview.com/).
+  * TechMockInterview is a paid service with high quality interviewers with detailed feedback.
+## Additional Reading
+* Read through all the [additional system design interview questions and real world architectures](https://github.com/donnemartin/system-design-primer#additional-system-design-interview-questions) in [System Design Primer](https://github.com/donnemartin/system-design-primer).
 # Resources
 * [Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems - Martin Kleppmann](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321) Chapters 1-7, 10-11
 * [The System Design Primer - Donne Martin](https://github.com/donnemartin/system-design-primer)
-	* Read through all the [additional system design interview questions and real world architectures](https://github.com/donnemartin/system-design-primer#additional-system-design-interview-questions).
 * [Grokking the System Design Interview - educative.io](https://www.educative.io/collection/5668639101419520/5649050225344512)
-* [Technical Mock Interview](https://www.techmockinterview.com/)
+* [TechMockInterview](https://www.techmockinterview.com/)
 # TODO
 * [Dynamo: Amazon’s Highly Available Key-value Store](https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf)
 * [Spanner: Google's Globally-Distributed Database](https://ai.google/research/pubs/pub39966)
