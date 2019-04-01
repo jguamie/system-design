@@ -9,7 +9,7 @@ Row keys are typically 10-100 bytes. The max size is 64 kilobytes. Bigtable stor
 Column keys are grouped into sets of column families. As column keys within a column family have minimal variability, it allows for optimal data compression within a column family.
 ### Timestamps
 Bigtable allows for multiple versions of the same data. These versions are indexed by timestamp. Different versions are stored in decreasing order so the most recent version is read first. Bigtable can be configured to garbage collect older versions automatically. With garbage collection turned on, only the most recent three versions are stored.
-## Dependencies
+## Integrations
 Bigtable uses the Sorted String Table (SSTable) file format for its indexes. Refer to Chapter 3: Storage and Retrieval in Designing Data-Intensive Applications for more information on SSTables.
 
 Bigtable uses the [Google File System](https://github.com/jguamie/system-design/blob/master/notes/google-file-system.md) to store log and data files.
@@ -17,6 +17,8 @@ Bigtable uses the [Google File System](https://github.com/jguamie/system-design/
 Bigtable uses the [Chubby Lock Service](https://github.com/jguamie/system-design/blob/master/notes/chubby-lock-service.md) to ensure a single active master, discover tablet servers, store Bigtable schema information, and store access control lists.
 
 Bigtable depends on Borg, Google's cluster management system, for scheduling jobs, managing resources on shared machines, dealing with machine failures, and monitoring machine health.
+
+Bigtable can be used as an input source and/or output target for [MapReduce](https://github.com/jguamie/system-design/blob/master/notes/map-reduce.md) jobs.
 ## Design
 Bigtable has three major components: a client library, one master server, and many tablet servers.
 ### Master
@@ -42,9 +44,28 @@ When a new master starts up, it executes the following steps:
 1. The master scans the METADATA tablets to learn of the sets of tablets. When the master encounters tablets that are not assigned to a live tablet server, the master will assign it accordingly.
 ## Transactions
 Bigtable will only support single-row [transactions](https://github.com/jguamie/system-design/blob/master/notes/transactions.md). Bigtable does not support general transactions across a range of row keys.
-## Applications
-### MapReduce
-Bigtable can be used as an input source and/or output target for [MapReduce](https://github.com/jguamie/system-design/blob/master/notes/map-reduce.md) jobs.
+## Locality Groups
+Clients can group multiple column families into a single locality group. A separate SSTable is generated for each locality group in a tablet. Locality groups allow for more efficient reads of column families that are typically read together.
+## Compression
+Bigtable allows for compression schemes for locality groups. In most cases, clients use a two-pass compression scheme:
+* The first pass uses Bentley and McIlroy's scheme that compresses long common strings across a large window.
+* The second pass uses a fast compression algorithm that compresses repetitions in a small 16 KB window.
+
+Both compressions are very fast. They encode at 100-200 MB/s and decode at 400-1,000 MB/s.
+
+In an experiment with web page content, the two-pass compression scheme achieved a 10-to-1 reduction in space. Gzip compression achieved a 4-to-1 reduction in space.
+## Caching
+Tablet servers use two levels of caching to improve read performance.
+* The Scan Cache is a high-level cache that caches key-value pairs returned by an SSTable.
+* The Block Cache is a low-level cache that caches blocks of SSTables read from GFS.
+
+The Scan Cache is useful for applications that read the same data repeatedly. The Block Cache is useful for applications that read data close to recently-read data e.g., sequential reads or random reads in the same locality group.
+## Bloom Filters
+Bigtable utilizes bloom filters to reduce the number of disk seeks for read operations. Bloom filters store if an SSTable does not contain data for a row/column pair; therefore, bloom filters prevent disk lookups for non-existent rows or columns.
+## Examples
+* **Google Analytics.** The raw clicks table contains data for each end-user session. The row name is a tuple containing the website's name and the time the session was created. The summary table contains predefined summaries for each website.
+* **Google Earth.** This system has one table to store raw imagery. The imagery table is the input source into a preprocessing MapReduce job. The output target is a table to serve client data.
+* **Personalized Search.** The user actions table contains data for all user actions. Each type of action has a separate column family. The user actions table is the input source into a MapReduce job. The output target is a user profiles table. These user profiles are used to personalize live search results.
 # Reference
 1. Chang, Fay, Dean, Jeffrey, Ghemawat, Sanjay, Hsieh, Wilson, Wallach, Deborah, Burrows, Mike, Chandra, Tushar, Fikes, Andrew, and Gruber, Robert, "[Bigtable: A Distributed Storage System for Structured Data](https://ai.google/research/pubs/pub27898)," 7th USENIX Symposium on Operating Systems Design and Implementation (OSDI), {USENIX} (2006), pp. 205-218
 1. Kleppmann, Martin. “Chapter 3: Storage and Retrieval.” [*Designing Data-Intensive Applications: The Big Ideas behind Reliable, Scalable, and Maintainable Systems*](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321). Sebastopol, CA: O'Reilly Media, 2017.
