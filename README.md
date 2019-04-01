@@ -4,7 +4,7 @@
 1. [What happens when you type google.com into your browser?](https://github.com/alex/what-happens-when)
 1. [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321), Chapters 1-2: Reliable, Scalable, and Maintainable Applications; Data Models and Query Languages
 	* [Twitter - My Notes](https://github.com/jguamie/system-design/blob/master/notes/twitter.md)
-1. [System Design Math - My Notes](https://github.com/jguamie/system-design/blob/master/notes/math.md)
+1. [System Design Numbers - My Notes](https://github.com/jguamie/system-design/blob/master/notes/numbers.md)
 1. [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321), Chapter 3: Storage and Retrieval
 1. [Caching - My Notes](https://github.com/jguamie/system-design/blob/master/notes/caching.md)
 1. [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321), Chapter 4: Encoding and Evolution
