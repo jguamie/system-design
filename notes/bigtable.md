@@ -64,7 +64,7 @@ The Scan Cache is useful for applications that read the same data repeatedly. Th
 Bigtable utilizes bloom filters to reduce the number of disk seeks for read operations. Bloom filters store if an SSTable does not contain data for a row/column pair; therefore, bloom filters prevent disk lookups for non-existent rows or columns.
 ## Examples
 * **Google Analytics.** The raw clicks table contains data for each end-user session. The row name is a tuple containing the website's name and the time the session was created. The summary table contains predefined summaries for each website.
-* **Google Earth.** This system has one table to store raw imagery. The imagery table is the input source into a preprocessing MapReduce job. The output target is a table to serve client data.
+* **Google Earth.** This imagery table is used to store raw imagery. The imagery table is the input source into a MapReduce job. The output target is a table to serve client data.
 * **Personalized Search.** The user actions table contains data for all user actions. Each type of action has a separate column family. The user actions table is the input source into a MapReduce job. The output target is a user profiles table. These user profiles are used to personalize live search results.
 # Reference
 1. Chang, Fay, Dean, Jeffrey, Ghemawat, Sanjay, Hsieh, Wilson, Wallach, Deborah, Burrows, Mike, Chandra, Tushar, Fikes, Andrew, and Gruber, Robert, "[Bigtable: A Distributed Storage System for Structured Data](https://ai.google/research/pubs/pub27898)," 7th USENIX Symposium on Operating Systems Design and Implementation (OSDI), {USENIX} (2006), pp. 205-218
