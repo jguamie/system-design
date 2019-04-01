@@ -8,7 +8,7 @@ Row keys are typically 10-100 bytes. The max size is 64 kilobytes. Bigtable stor
 ### Column Keys
 Column keys are grouped into sets of column families. As column keys within a column family have minimal variability, it allows for optimal data compression within a column family.
 ### Timestamps
-Bigtable allows for multiple versions of the same data. These versions are indexed by timestamp. Different versions are stored in decreasing order so the most recent version is read first. Bigtable can be configured to garbage collect older versions automatically. With garbage collection turned on, only the most recent three versions are stored.
+Bigtable allows for multiple versions of the same data. These versions are indexed by timestamp. Bigtable can be configured to garbage collect older versions automatically. With garbage collection turned on, only the most recent three versions are stored.
 ## Integrations
 Bigtable uses the Sorted String Table (SSTable) file format for its indexes. Refer to Chapter 3: Storage and Retrieval in Designing Data-Intensive Applications for more information on SSTables.
 
