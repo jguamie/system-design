@@ -28,7 +28,7 @@ Each tablet server will manage between 10 to 1,000 tablets. The tablet server ha
 ### Clients
 Clients communicate directly with tablet servers through the client library for all their read and write requests. Clients do not rely on the Bigtable master for tablet location information. Clients only communicate with the master on schema changes; therefore, the master is typically lightly loaded.
 ### Tablet Location
-Bigtable uses a three-level hierarchy to store tablet location information. This hierarchy can store up to 2<sup>34</sup>tablets.
+Bigtable uses a three-level hierarchy to store tablet location information. This hierarchy can store up to 2<sup>34</sup> tablets.
 <img src="https://github.com/jguamie/system-design/blob/master/images/bigtable-tablet-location.png" align="middle" width="60%">
 
 1. The first level is the Root tablet. The Root tablet location is stored in a Chubby file. The Root tablet contains mappings of all the User tablets to their respective METADATA tablet. The Root tablet is never split to maintain a three-level hierarchy.
