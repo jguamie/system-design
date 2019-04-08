@@ -28,6 +28,8 @@
 1. [Bigtable: A Distributed Storage System for Structured Data](http://research.google.com/archive/bigtable.html)
 	* [Bigtable - My Notes](https://github.com/jguamie/system-design/blob/master/notes/bigtable.md)
 1. [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321), Chapter 11: Stream Processing
+	* [Event Sourcing and Stream Processing - Martin Kleppmann Video](https://youtu.be/avi-TZI9t2I)
+	* [Materialized Views with Apache Samza - Martin Kleppmann Video](https://youtu.be/fU9hR3kiOK0) 
 1. [Google: the Anatomy of a Large-Scale Hypertextual Web Search Engine](http://infolab.stanford.edu/~backrub/google.html)
 	* [Google - My Notes](https://github.com/jguamie/system-design/blob/master/notes/google-search-engine.md)
 ## Mock Interviews
