@@ -3,7 +3,7 @@
 * Follow this [outline](https://github.com/jguamie/system-design/blob/master/notes/system-design-outline.md) when solving system design questions.
 ## Mock Interviews
 * Practice with at least 5 system design mock interviews using [TechMockInterview](https://www.techmockinterview.com/).
-  * TechMockInterview is a paid service with high quality interviewers with detailed feedback.
+  * TechMockInterview is a paid service with high quality interviewers that provide detailed feedback and personalized coaching.
 ## Recommended Order of Reading
 1. [Building Software Systems At Google and Lessons Learned - Jeff Dean Video](https://youtu.be/modXC5IWTJI)
 1. [What happens when you type google.com into your browser?](https://github.com/alex/what-happens-when)
