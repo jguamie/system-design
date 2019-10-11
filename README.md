@@ -45,5 +45,4 @@
 * [Grokking the System Design Interview - educative.io](https://www.educative.io/collection/5668639101419520/5649050225344512)
 * [TechMockInterview](https://www.techmockinterview.com/)
 # TODO
-* [Dynamo: Amazon’s Highly Available Key-value Store](https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf)
 * [Spanner: Google's Globally-Distributed Database](https://ai.google/research/pubs/pub39966)
