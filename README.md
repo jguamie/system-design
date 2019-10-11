@@ -1,5 +1,6 @@
 # System Design Notes
-* Follow this [approach](https://github.com/jguamie/system-design/blob/master/notes/system-design-outline.md) when solving system design questions.
+## Outline for System Design Problems
+* Follow this [outline](https://github.com/jguamie/system-design/blob/master/notes/system-design-outline.md) when solving system design questions.
 ## Recommended Order of Reading
 1. [Building Software Systems At Google and Lessons Learned - Jeff Dean Video](https://youtu.be/modXC5IWTJI)
 1. [What happens when you type google.com into your browser?](https://github.com/alex/what-happens-when)
