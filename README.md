@@ -1,6 +1,9 @@
 # System Design Notes
 ## Outline for System Design Problems
 * Follow this [outline](https://github.com/jguamie/system-design/blob/master/notes/system-design-outline.md) when solving system design questions.
+## Mock Interviews
+* Practice with at least 5 system design mock interviews using [TechMockInterview](https://www.techmockinterview.com/).
+  * TechMockInterview is a paid service with high quality interviewers with detailed feedback.
 ## Recommended Order of Reading
 1. [Building Software Systems At Google and Lessons Learned - Jeff Dean Video](https://youtu.be/modXC5IWTJI)
 1. [What happens when you type google.com into your browser?](https://github.com/alex/what-happens-when)
@@ -34,9 +37,6 @@
 	* [Materialized Views with Apache Samza - Martin Kleppmann Video](https://youtu.be/fU9hR3kiOK0) 
 1. [Google: the Anatomy of a Large-Scale Hypertextual Web Search Engine](http://infolab.stanford.edu/~backrub/google.html)
 	* [Google - My Notes](https://github.com/jguamie/system-design/blob/master/notes/google-search-engine.md)
-## Mock Interviews
-* Practice with at least 5 system design mock interviews using [TechMockInterview](https://www.techmockinterview.com/).
-  * TechMockInterview is a paid service with high quality interviewers with detailed feedback.
 ## Additional Reading
 * Read through all the [additional system design interview questions and real world architectures](https://github.com/donnemartin/system-design-primer#additional-system-design-interview-questions) in [System Design Primer](https://github.com/donnemartin/system-design-primer).
 # Resources
