@@ -30,4 +30,4 @@ This is a recommended approach to solving system design problems. Throughout the
 	1. Replication
 	1. Business Continuity and Disaster Recovery (BCDR)
 	1. Internationalization / Localization
-		1. How to scale to multiple countries and languages? Don't assume US-only equates to English only.
+		1. How to scale to multiple countries and languages? Don't assume the US is English-only.
