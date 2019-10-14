@@ -1,4 +1,4 @@
-# System Design Notes
+# Preparing for the System Design Interview
 ## Outline for System Design Problems
 * Follow this [outline](https://github.com/jguamie/system-design/blob/master/notes/system-design-outline.md) when solving system design questions.
 ## Mock Interviews
