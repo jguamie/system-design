@@ -20,7 +20,7 @@ This is a recommended approach to solving system design problems. Throughout the
 	1. Message Queues
 1. System Design
 1. Scalability
-	1. How does your system scale? Consider both data size and traffic increases.
+	1. How does the system scale? Consider both data size and traffic increases.
 	1. What are the bottlenecks? How should they be addressed?
 	1. What are the edge cases? What could go wrong? Assuming they occur, how should they be addressed?
 	1. Load Balancing
