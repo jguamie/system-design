@@ -7,16 +7,20 @@ This is a recommended approach to solving system design problems. Throughout the
 		1. How fast does this system need to be? 
 		1. User-perceived latency
 		1. Data processing latency
-	1. Security / Privacy
+	1. Security
+		1. Potential attacks? How should they be mitigated?
+	1. Privacy
 		1. PII, PCI, or other user data
-	1. Data Durability
+	1. Data Integrity
+		1. How to recover from data corruption or loss?
 	1. Read:Write Ratio
 1. APIs
 1. Storage Schemas
 	1. SQL vs NoSQL
 	1. Message Queues
-1. Simple System Design
-1. Scaled System Design
+1. System Design
+1. Scalability
+	1. How does your system scale? Consider both data size and traffic increases.
 	1. What are the bottlenecks? How should they be addressed?
 	1. What are the edge cases? What could go wrong? Assuming they occur, how should they be addressed?
 	1. Load Balancing
@@ -25,5 +29,5 @@ This is a recommended approach to solving system design problems. Throughout the
 	1. Parititioning
 	1. Replication
 	1. Business Continuity and Disaster Recovery (BCDR)
-	1. Regionalization / Localization
- 
+	1. Internationalization / Localization
+		1. How to scale to multiple countries and languages? Don't assume US-only equates to English only.
