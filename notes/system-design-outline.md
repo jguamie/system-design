@@ -24,7 +24,7 @@ This is a recommended approach to solving system design problems. Throughout the
 	1. What are the bottlenecks? How should they be addressed?
 	1. What are the edge cases? What could go wrong? Assuming they occur, how should they be addressed?
 	1. Load Balancing
-	1. Auto-scaling / replication
+	1. Auto-scaling / Replication
 	1. Caching
 	1. Parititioning
 	1. Replication
