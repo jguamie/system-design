@@ -2,13 +2,15 @@
 Studying for distributed system design interviews are only necessary if you are targeting L5+ at Google.
 ## Prerequisites
 * Go through the [Grokking the System Design Interview](https://www.educative.io/collection/5668639101419520/5649050225344512) online course. 
-  * This will get you familiar with the core concepts and the most popular system design questions that are still asked regularly.
+  * This will get you familiar with the core concepts and the most popular system design questions. These questions are still asked regularly.
   * This course only covers the basics. Regurgitating these answers in an interview will not be enough to pass a Google system design interview.
 ## Outline for System Design Problems
 * Follow this [outline](https://github.com/jguamie/system-design/blob/master/notes/system-design-outline.md) when solving system design questions.
+  * Not all the topics in the outline are required. Depending on the problem, some topics are more relevant than others.
+  * At Google, engineers write design documentation before we start implementing features. This outline is very similar to how we approach design. The system design interview very much emulates how we work at Google. 
 ## Practice
 ### Mock Interviews
-Practicing with mock interviews is mandatory. I cannot stress this enough. I read through all the resources below and wrote summaries on a majority of them. That wasn't enough for me to be able to walk through a system design discussion. You have to build the habits necessary to tell a complete story without missing the key talking points. You will not be able to attain that without regular practice.
+Practicing with mock interviews is mandatory. I cannot stress this enough. You have to build the habits necessary to tell a complete story without missing the key talking points. You will not be able to attain that without regular practice.
 
 Mock interview resources:
 * [Technical Mock Interview](https://www.techmockinterview.com/)
