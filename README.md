@@ -7,7 +7,7 @@ Studying for distributed system design interviews are only necessary if you are 
 ## Outline for System Design Problems
 * Follow this [outline](https://github.com/jguamie/system-design/blob/master/notes/system-design-outline.md) when solving system design questions.
   * Not all the topics in the outline are required. Depending on the problem, some topics are more relevant than others.
-  * At Google, engineers write design documentation before we start implementing features. This outline is very similar to how we approach design. The system design interview very much emulates how we work at Google. 
+  * At Google, engineers write design documentation before we start implementing features. This outline is very similar to how we approach the design process. The system design interview very much emulates how we work at Google. 
 ## Practice
 ### Mock Interviews
 Practicing with mock interviews is mandatory. I cannot stress this enough. You have to build the habits necessary to tell a complete story without missing the key talking points. You will not be able to attain that without regular practice.
