@@ -1,9 +1,22 @@
 # Preparing for the Google System Design Interview
+Studying for distributed system design interviews are only necessary if you are targeting L5+ at Google.
+## Prerequisites
+* Go through the [Grokking the System Design Interview](https://www.educative.io/collection/5668639101419520/5649050225344512) online course. 
+  * This will get you familiar with the core concepts and the most popular system design questions that are still asked regularly.
+  * This course only covers the basics. Regurgitating these answers in an interview will not be enough to pass a Google system design interview.
 ## Outline for System Design Problems
 * Follow this [outline](https://github.com/jguamie/system-design/blob/master/notes/system-design-outline.md) when solving system design questions.
-## Mock Interviews
-* Practice with at least 5 system design mock interviews using [TechMockInterview](https://www.techmockinterview.com/).
-  * TechMockInterview is a paid service with high quality interviewers that provide detailed feedback and personalized coaching.
+## Practice
+### Mock Interviews
+Practicing with mock interviews is mandatory. I cannot stress this enough. I read through all the resources below and wrote summaries on a majority of them. That wasn't enough for me to be able to walk through a system design discussion. You have to build the habits necessary to tell a complete story without missing the key talking points. You will not be able to attain that without regular practice.
+
+Mock interview resources:
+* [Technical Mock Interview](https://www.techmockinterview.com/)
+  * This is a paid service with high quality interviewers from Google, Facebook, and Amazon with detailed verbal/written feedback and personalized coaching. I strongly recommend doing at least 7 mocks through here.
+* Friends and colleagues
+  * Find other engineers to practice with. Start an interview club with your friends. Meet weekly to go through readings and videos together.
+* Mentor
+  * Find a mentor. Reach out to people you respect and ask them to meet with you regularly to build a mentoring relationship.
 ## Recommended Order of Reading
 1. [Building Software Systems At Google and Lessons Learned - Jeff Dean Video](https://youtu.be/modXC5IWTJI)
 1. [What happens when you type google.com into your browser?](https://github.com/alex/what-happens-when)
