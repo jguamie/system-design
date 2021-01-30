@@ -16,7 +16,7 @@ Studying for distributed system design interviews are only necessary if you are 
 * Interviewers will expect you to drive the discussion. You shouldn't be waiting for the interviewer to ask you questions. At Google, we come up with an end-to-end solution (as I mentioned, covering a lot of the topics in [this outline](https://github.com/jguamie/system-design/blob/master/notes/system-design-outline.md)) and present it to other engineers during a design review for discussion and approval. If you feel you're at a fork in the road, you can always ask, "Would you like me to dig into this aspect further or would you like me to move on?" 
 ## Practice
 ### Mock Interviews
-Practicing with mock interviews is mandatory. I cannot stress this enough. You have to build the habits necessary to tell a complete story without missing the key talking points. You will not be able to attain that without regular practice.
+Practicing with mock interviews is ***mandatory***. I cannot stress this enough. You have to build the habits necessary to tell a complete story without missing the key talking points. You will not be able to attain that without regular practice.
 
 Mock interview resources:
 * [Technical Mock Interview](https://www.techmockinterview.com/)
