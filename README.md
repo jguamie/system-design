@@ -24,7 +24,7 @@ Mock interview resources:
 * Friends and colleagues
   * Find other engineers to practice with. Start an interview club with your friends. Meet weekly to go through readings and videos together.
 * Mentor
-  * Find a mentor. Reach out to people you respect and ask them to meet with you regularly to build a mentoring relationship.
+  * Find a mentor. Reach out to other software engineers you respect. Ask them to meet with you regularly for mentoring sessions.
 ## Recommended Order of Reading
 1. [Building Software Systems At Google and Lessons Learned - Jeff Dean Video](https://youtu.be/modXC5IWTJI)
 1. [What happens when you type google.com into your browser?](https://github.com/alex/what-happens-when)
