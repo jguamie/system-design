@@ -1,5 +1,5 @@
 # Preparing for the Google System Design Interview
-Studying for distributed system design interviews are only necessary if you are targeting L5+ at Google.
+Studying for system design interviews are only necessary if you are targeting L5+ at Google.
 ## Prerequisites
 * Go through the [Grokking the System Design Interview](https://www.educative.io/collection/5668639101419520/5649050225344512) online course. 
   * This will get you familiar with the core concepts and the most popular system design questions. These questions are still asked regularly.
@@ -11,7 +11,7 @@ Studying for distributed system design interviews are only necessary if you are 
 ## Tips for Success
 * When asked to design a system, immediately start thinking about, "What is the Google-scale problem or bottleneck that needs to be solved?" That will always be the end goal of a Google system design interview. For example:
   * When you're asked to design Ticketmaster, don't waste your time designing the frontend. Most of your design focus should be on, "How will my system handle the massive spike in requests at the opening minutes to an extremely popular show?"
-  * When you're asked to design a leaderboard, focus on, "How will I update someone's ranking amongst 10 million+ players? On top of that, how do I keep up with updating rankings for 500,000+ players that are actively playing right now?"  
+  * When you're asked to design a leaderboard, focus on, "How will I update someone's rank amongst 10 million+ players? On top of that, how do I keep up with updating rankings for 500,000+ active players that are playing right now?"  
 * Throughout the discussion, always mention trade-offs. Discuss alternative approaches and the pros and cons of each approach. Next, explain why one approach is ideal for the given problem. Even if you believe certain alternatives are obviously bad approaches, at least mention it and explain why.
 * Interviewers will expect you to drive the discussion. You shouldn't be waiting for the interviewer to ask you questions. At Google, we come up with an end-to-end solution (as I mentioned, covering a lot of the topics in [this outline](https://github.com/jguamie/system-design/blob/master/notes/system-design-outline.md)) and present it to other engineers during a design review for discussion and approval. If you feel you're at a fork in the road, you can always ask, "Would you like me to dig into this aspect further or would you like me to move on?" 
 ## Practice
