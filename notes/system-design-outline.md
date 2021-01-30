@@ -1,5 +1,5 @@
 # System Design Outline
-This is a recommended approach to solving system design problems. Throughout the discussion, always mention trade-offs. Discuss alternative approaches and the pros and cons of each approach. Next, explain why one approach is ideal for the given problem.
+This is a recommended approach to solving system design problems.
 1. Functional Requirements / Clarifications / Assumptions
 1. Non-Functional Requirements
 	1. Consistency vs Availability
