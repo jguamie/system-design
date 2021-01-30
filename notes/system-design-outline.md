@@ -1,5 +1,5 @@
 # System Design Outline
-This is a recommended approach to solving system design problems. Not all of these topics will be relevant to a given problem.
+This is a recommended approach to solving system design problems. Not all of these topics will be relevant for a given problem.
 1. Functional Requirements / Clarifications / Assumptions
 1. Non-Functional Requirements
 	1. Consistency vs Availability
