@@ -9,7 +9,7 @@ Studying for distributed system design interviews are only necessary if you are 
   * Not all the topics in the outline are required. Depending on the problem, some topics are more relevant than others.
   * At Google, engineers write design documentation before we start implementing features. This outline is very similar to how we approach the design process. The system design interview very much emulates how we work at Google. 
 ## Tips for Success
-* For asked to design a system, immediately start thinking about, "What is the Google-scale problem or bottleneck that needs to be solved?" That will always be the end goal of a Google system design interview. For example:
+* When asked to design a system, immediately start thinking about, "What is the Google-scale problem or bottleneck that needs to be solved?" That will always be the end goal of a Google system design interview. For example:
   * When you're asked to design Ticketmaster, don't waste your time designing the frontend. Most of your design focus should be on, "How will my system handle the massive spike in requests at the opening minutes to an extremely popular show?"
   * When you're asked to design a leaderboard, focus on, "How will I update someone's ranking amongst 10 million+ players? On top of that, how do I keep up with updating rankings for 500,000+ players that are actively playing right now?"  
 * Throughout the discussion, always mention trade-offs. Discuss alternative approaches and the pros and cons of each approach. Next, explain why one approach is ideal for the given problem. Even if you believe certain alternatives are obviously bad approaches, at least mention it and explain why.
