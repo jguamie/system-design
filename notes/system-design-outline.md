@@ -23,6 +23,7 @@ This is a recommended approach to solving system design problems. Not all of the
 	1. How does the system scale? Consider both data size and traffic increases.
 	1. What are the bottlenecks? How should they be addressed?
 	1. What are the edge cases? What could go wrong? Assuming they occur, how should they be addressed?
+	1. How will we stress and test this system?
 	1. Load Balancing
 	1. Auto-scaling / Replication
 	1. Caching
