@@ -9,11 +9,13 @@ Studying for system design interviews are only necessary if you are targeting L5
   * Not all the topics in the outline are required. Depending on the problem, some topics are more relevant than others.
   * At Google, we write design documentation before we start implementing features. This outline is very similar to how we approach the design process. The system design interview very much emulates how we work at Google. 
 ## Tips for Success
-* When asked to design a system, immediately start thinking about, "What is the Google-scale problem or bottleneck that needs to be solved?" That will always be the end goal of a Google system design interview. For example:
+* Spend at least a couple minutes digging into the requirements so you are building the right system. Interviewees can get carried away building systems that the interviewer did not ask for. This part is important in highlighting your user empathy.
+* When asked to design a system, immediately start thinking about, "What is the Google-scale problem or bottleneck that needs to be solved?" For example:
   * When you're asked to design Ticketmaster, don't waste your time designing the frontend. Most of your design focus should be on, "How will my system handle the massive spike in requests at the opening minutes to an extremely popular show?"
   * When you're asked to design a leaderboard, focus on, "How will I update someone's rank amongst 10 million+ players? On top of that, how do I keep up with updating rankings for 500,000+ active players that are playing right now?"  
 * Throughout the discussion, always mention trade-offs. Discuss alternative approaches and the pros and cons of each approach. Next, explain why one approach is ideal for the given problem. Even if you believe certain alternatives are obviously bad approaches, at least mention it and explain why.
 * Interviewers will expect you to drive the discussion. You shouldn't be waiting for the interviewer to ask you questions. At Google, we come up with an end-to-end solution (as I mentioned, covering a lot of the topics in [this outline](https://github.com/jguamie/system-design/blob/master/notes/system-design-outline.md)) and present it to other engineers during a design review for discussion and approval. If you feel you're at a fork in the road, you can always ask, "Would you like me to dig into this aspect further or move on to something else?" 
+* Remember to tie everything back to the requirements (user goals). Don't overdesign a system that isn't core to the problem. Again, remember to build the right system the interviewer asked for.
 ## Practice
 ### Mock Interviews
 Practicing with mock interviews is ***mandatory***. I cannot stress this enough. You have to build the habits necessary to tell a complete story without missing the key talking points. You will not be able to attain that without regular practice.
