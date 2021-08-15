@@ -17,7 +17,7 @@ Powers of 2 | Decimal | Bytes | Words
 2<sup>40</sup> | 1,099,511,627,776 | 5 bytes | 1 trillion
 2<sup>48</sup> | - | 6 bytes | 281 trillion
 2<sup>56</sup> | - | 7 bytes | 72 quadillion
-2<sup>56</sup> | - | 8 bytes | 9.2 quintillion
+2<sup>64</sup> | - | 8 bytes | 9.2 quintillion
 ## Sizes of Fundamental Types
 ### C++
 Type | Size
