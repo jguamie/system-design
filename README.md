@@ -18,7 +18,7 @@ Studying for system design interviews are only necessary if you are targeting L5
 * Remember to tie everything back to the requirements (user goals). Don't overdesign a system that isn't core to the problem. Again, remember to build the right system the interviewer asked for.
 ## Practice
 ### Mock Interviews
-Practicing with mock interviews is ***mandatory***. I cannot stress this enough. You have to build the habits necessary to tell a complete story without missing the key talking points. You will not be able to attain that without regular practice.
+Practicing with mock interviews is ***mandatory***. I cannot stress this enough. You have to build the habits necessary to tell a complete story without missing the key talking points. Practice is the only way you will get the pacing down on how much time to spend in each section and still leave enough room for general questions. You will not be able to attain that without regular practice.
 
 Mock interview resources:
 * [Technical Mock Interview](https://www.techmockinterview.com/)
