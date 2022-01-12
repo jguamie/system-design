@@ -72,4 +72,12 @@ Mock interview resources:
 * [The System Design Primer - Donne Martin](https://github.com/donnemartin/system-design-primer)
 * [Grokking the System Design Interview - educative.io](https://www.educative.io/collection/5668639101419520/5649050225344512)
 * [TechMockInterview](https://www.techmockinterview.com/)
+## License
+I am providing code and resources in this repository to you under an open source license. Because this is my personal repository, the license you receive to my code and resources is from me and not my employer (Google).
+```
+Copyright 2019 John Sangki Lee
 
+Creative Commons Attribution 4.0 International License (CC BY 4.0)
+
+http://creativecommons.org/licenses/by/4.0/
+```
