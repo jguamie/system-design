@@ -62,7 +62,7 @@ Mock interview resources:
 	* ***TODO on My Notes***
 1. [Google: the Anatomy of a Large-Scale Hypertextual Web Search Engine](http://infolab.stanford.edu/~backrub/google.html)
 	* [Google - My Notes](https://github.com/jguamie/system-design/blob/master/notes/google-search-engine.md)
-1. * [Spanner: Google's Globally-Distributed Database](https://ai.google/research/pubs/pub39966)
+1. [Spanner: Google's Globally-Distributed Database](https://ai.google/research/pubs/pub39966)
 	* ***TODO on My Notes***
 ## Additional Reading
 * Read through all the [additional system design interview questions and real world architectures](https://github.com/donnemartin/system-design-primer#additional-system-design-interview-questions) in [System Design Primer](https://github.com/donnemartin/system-design-primer).
