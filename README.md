@@ -38,7 +38,8 @@ Mock interview resources:
 1. [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321), Chapter 4: Encoding and Evolution
 1. [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321), Chapter 5: Replication
 	* [Replication - My Notes](https://github.com/jguamie/system-design/blob/master/notes/replication.md)
-1. [Raft: Understandable Distributed Consensus](http://thesecretlivesofdata.com/raft/) 
+1. [Raft: Understandable Distributed Consensus - Animation](http://thesecretlivesofdata.com/raft/) 
+	* Watch the [Raft animation](http://thesecretlivesofdata.com/raft/) prior to reading the notes.
 	* [Raft Distributed Consensus - My Notes](https://github.com/jguamie/system-design/blob/master/notes/raft-distributed-consensus.md)
 1. [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321), Chapter 6: Partitioning
 	* [Partitioning - My Notes](https://github.com/jguamie/system-design/blob/master/notes/partitioning.md)
