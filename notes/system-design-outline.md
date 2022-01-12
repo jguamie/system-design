@@ -15,6 +15,9 @@ This is a recommended approach to solving system design problems. Not all of the
 		1. How to recover from data corruption or loss?
 	1. Read:Write Ratio
 1. APIs
+	1. Public and/or internal APIs?
+	1. Are the APIs simple and easy to understand?
+	1. How are entities identified?
 1. Storage Schemas
 	1. SQL vs NoSQL
 	1. Message Queues
