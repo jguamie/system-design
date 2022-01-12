@@ -51,13 +51,15 @@ Mock interview resources:
 1. [Chubby: A Lock Service for Loosely-Coupled Distributed Systems](https://ai.google/research/pubs/pub27897)
 	* [Chubby - My Notes](https://github.com/jguamie/system-design/blob/master/notes/chubby-lock-service.md)
 1. [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321), Chapter 10: Batch Processing
+	* TODO on My Notes
 1. [MapReduce: Simplified Data Processing on Large Clusters](http://research.google.com/archive/mapreduce.html)
 	* [MapReduce - My Notes](https://github.com/jguamie/system-design/blob/master/notes/map-reduce.md)
 1. [Bigtable: A Distributed Storage System for Structured Data](http://research.google.com/archive/bigtable.html)
 	* [Bigtable - My Notes](https://github.com/jguamie/system-design/blob/master/notes/bigtable.md)
 1. [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321), Chapter 11: Stream Processing
 	* [Event Sourcing and Stream Processing - Martin Kleppmann Video](https://youtu.be/avi-TZI9t2I)
-	* [Materialized Views with Apache Samza - Martin Kleppmann Video](https://youtu.be/fU9hR3kiOK0) 
+	* [Materialized Views with Apache Samza - Martin Kleppmann Video](https://youtu.be/fU9hR3kiOK0)
+	* TODO on My Notes
 1. [Google: the Anatomy of a Large-Scale Hypertextual Web Search Engine](http://infolab.stanford.edu/~backrub/google.html)
 	* [Google - My Notes](https://github.com/jguamie/system-design/blob/master/notes/google-search-engine.md)
 ## Additional Reading
