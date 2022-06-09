@@ -30,7 +30,7 @@ This is a recommended approach to solving system design problems. Not all of the
 	1. Load Balancing
 	1. Auto-scaling / Replication
 	1. Caching
-	1. Parititioning
+	1. Partitioning
 	1. Replication
 	1. Business Continuity and Disaster Recovery (BCDR)
 	1. Internationalization / Localization
