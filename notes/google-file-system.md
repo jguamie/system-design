@@ -36,7 +36,7 @@ Each GFS cluster has a single master and multiple chunk servers (3 replicas at d
 
 These are the steps in which mutations are applied.
 1. The client requests for the primary chunkserver that hold a lease to a chunk as well as the replicas. If a chunkserver doesn't have the lease, the master grants a lease to one of the replicas. This replica becomes the primary.
-1. The master replies with the identity or the primary and the locations of the secondary replicas. The client caches this lease for future mutations until the lease times out.
+1. The master replies with the identity of the primary and the locations of the secondary replicas. The client caches this lease for future mutations until the lease times out.
 1. **Data Flow.** The client pushes the data to all the replicas. Each chunkserver stores the data in an internal LRU buffer cache. The send order does not matter.
 1. **Control Flow.** Once all the replicas acknowledge receiving the data, the client sends a write request to the primary. The primary assigns a consecutive serial number to the mutation (serialization). It applies the mutation in its own local state in serial number order.
 1. The primary forwards the write request and serial number to all the secondary replicas. Each replica applies the mutation in the same serial number order as the primary.
