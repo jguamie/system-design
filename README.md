@@ -1,7 +1,7 @@
 # Preparing for the Google System Design Interview
 Studying for system design interviews are only necessary if you are targeting L5+ at Google.
 ## Prerequisites
-* Go through the [Grokking the System Design Interview](https://www.educative.io/collection/5668639101419520/5649050225344512) online course. 
+* Go through the [Grokking the System Design Interview](https://www.designgurus.io/course/grokking-the-system-design-interview) online course. 
   * This will get you familiar with the core concepts and the most popular system design questions. These questions are still asked regularly.
   * This course only covers the basics. Regurgitating these answers in an interview will not be enough to pass a Google system design interview.
 ## Outline for System Design Problems
@@ -70,7 +70,7 @@ Mock interview resources:
 # Resources
 * [Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems - Martin Kleppmann](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321) Chapters 1-7, 10-11
 * [The System Design Primer - Donne Martin](https://github.com/donnemartin/system-design-primer)
-* [Grokking the System Design Interview - educative.io](https://www.educative.io/collection/5668639101419520/5649050225344512)
+* [Grokking the System Design Interview - Design Gurus](https://www.designgurus.io/course/grokking-the-system-design-interview)
 * [TechMockInterview](https://www.techmockinterview.com/)
 # License
 I am providing code and resources in this repository to you under an open source license. Because this is my personal repository, the license you receive to my code and resources is from me and not my employer (Google).
